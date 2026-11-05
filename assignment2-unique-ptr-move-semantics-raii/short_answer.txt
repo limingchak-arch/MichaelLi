@@ -1,26 +1,23 @@
-Before submitting this file, make sure that there are no more TODO
-placeholders remaining in the file (and remove this comment too).
-
 Unique Pointer
 --------------
 
 Q1. List one or two benefits of using RAII to manage memory instead manually calling `new` and `delete`.
-A1. TODO
+A1. First, deallocation is automatic: the destructor runs when the object goes out of scope, so memory is freed even if a function returns early or throws an exception — no leaks from forgotten `delete`s. Second, ownership is explicit in the type: a unique_ptr cannot be copied, so two pieces of code can never both think they own (and double-delete) the same memory.
 
 Q2. When implementing move semantics for a `unique_ptr`, for example in the move constructor `unique_ptr(unique_ptr&& other)`, it is essential that we set the underlying pointer of the `other` parameter to `nullptr` before exiting the function. Explain in your own words what problem would arise if we did not.
-A2. TODO
+A2. If we did not null out `other`, both objects would hold the same raw pointer. When `other` is eventually destroyed, its destructor would `delete` that memory — leaving the moved-to object with a dangling pointer, and using it (or deleting it again in its own destructor) is undefined behavior / a double-free. Setting `other` to nullptr makes its `delete nullptr` a harmless no-op, keeping exactly one owner of the memory.
 
 Q3. This method of recursive deallocation through RAII works great for small lists, but may pose a problem for longer lists. Why? Hint: what is the limit for how "deep" a recursive function's call stack can grow?
-A3. TODO
+A3. Destroying the head node destroys its `next`, which destroys the next node, and so on — a chain of nested destructor calls one frame deep per node. The call stack has a fixed, limited size (typically ~8 MB), so for a very long list (millions of nodes) this recursion can overflow the stack and crash the program, even though each individual frame is tiny.
 
 Q4. What does `std::move` do in this context? Why is it safe to use `std::move` and move semantics here?
-A4. TODO
+A4. `std::move(head)` does not actually move anything — it is just a cast that turns `head` into an rvalue reference, which selects the move assignment operator instead of the (deleted) copy assignment. It is safe here because of the order of operations: we move the old `head` into `node->next` first, and immediately afterwards `head` itself is overwritten by `std::move(node)`. Each moved-from pointer is either given a new value right away or is the final nullptr we started with, so ownership stays unique at every step.
 
 Q5. Why does `operator->` return `T*` (a pointer) rather than `T&` (a reference)? Walk through what the compiler does when it sees `ptr->member`.
-A5. TODO
+A5. When the compiler sees `ptr->member` on a class type, it rewrites it as `(ptr.operator->())->member` — it calls our `operator->`, then applies the built-in arrow to whatever came back. The built-in `->` needs a pointer to follow, so our overload must return `T*`, not `T&` (a reference cannot be "followed" again; there is no `->` for references). Returning the raw pointer also lets the recursion of operator-> terminate at the built-in meaning.
 
 Q6. Why does this class need BOTH `T& operator*()` and `const T& operator*() const`? Give a one-line code example that would fail to compile if one of them were missing, and explain which one.
-A6. TODO
+A6. The two overloads let the operator work on both mutable and const unique_ptr objects while preserving const-correctness. Without the const version, `void f(const cs106l::unique_ptr<int>& p) { int x = *p; }` would fail to compile, because calling a non-const member function on a const object is not allowed. Without the non-const version, `*p = 42;` on a mutable unique_ptr would fail, because a const reference cannot be assigned to.
 
 Q7. We marked `operator bool()` as `explicit`. What kind of unintended code would compile if we had left the `explicit` off? Give a concrete example.
-A7. TODO
+A7. Without `explicit`, the conversion could fire implicitly in contexts where a bool-to-int or pointer-to-bool conversion was never intended. For example, `cs106l::unique_ptr<int> p = cs106l::make_unique<int>(5); int x = p + 1;` would compile — `p` silently converts to bool (true), then to int 1, giving x = 2, which is almost certainly a bug. With `explicit`, the conversion only happens in explicit boolean contexts like `if (p)`, and nonsense arithmetic is a compile error.
