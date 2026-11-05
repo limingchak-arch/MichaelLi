@@ -3,20 +3,54 @@ Assignment 1: Marriage Pact — short answers
 
 Q1. reserve vs resize — and the capacity you chose in get_applicants.
     YOUR ANSWER:
+    reserve() only pre-allocates capacity; the vector's size stays 0 and
+    no elements are constructed. resize() actually changes the size,
+    value-initializing real elements (e.g. 1000 empty strings) that you
+    would then have to overwrite. I chose reserve(1000) because
+    students.txt has exactly 1000 lines, so the vector never has to
+    reallocate and copy while we push_back the names.
 
 
 Q2. What does it mean for a std::ranges algorithm to take a projection?
     Give one example from your find_matches (or explain why a projection
     didn't help).
     YOUR ANSWER:
+    A projection is an extra callable the algorithm applies to each
+    element BEFORE the predicate/comparison sees it — i.e. "transform
+    first, then judge". In find_matches a projection could turn each
+    applicant into their initials, e.g.
+      std::ranges::copy_if(students, out,
+          [&](std::string_view in){ return in == target; },
+          [](const std::string& s){ return initials(s); });
+    I kept the predicate-only version because computing initials inside
+    the lambda was already clear enough, but the projection form splits
+    "how to look at an element" from "what condition to check", which
+    reads better as the logic grows.
 
 
 Q3. Iterator invalidation in run_mixer. Which strategy did you choose
     (erase-returns-next-iterator / indices / restart) and why?
     What specifically goes wrong with the naive approach?
     YOUR ANSWER:
+    I chose strategy 1: use the iterator returned by erase(). In the
+    naive loop you erase the current element and then keep using (or
+    increment) the old iterator — but erase shifts every later element
+    one slot left, so the old iterator dangles: at best you silently
+    skip the element that slid into that slot, at worst you run past
+    end() and crash (UB). Instead I erase the later match first, then
+    assign `it = applicants.erase(it)`, which makes `it` point at the
+    element after the erased one, so the scan continues safely. I erase
+    the back element before the front one so that the first erase
+    cannot invalidate the second iterator.
 
 
 Q4. at() vs []. When, if ever, would you reach for vec.at(i) over
     vec[i] in this assignment?
     YOUR ANSWER:
+    vec.at(i) performs bounds checking and throws std::out_of_range on
+    a bad index, while vec[i] does no checking and an out-of-range
+    index is silent undefined behavior. I would use at() while
+    debugging index-based logic (e.g. the initials helper reading
+    name[space + 1]) to turn memory bugs into catchable exceptions.
+    For the final code I stick with []: it is faster, and the loops and
+    algorithms here already guarantee valid positions.
