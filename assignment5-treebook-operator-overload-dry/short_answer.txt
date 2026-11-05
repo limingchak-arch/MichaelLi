@@ -9,6 +9,20 @@ Q1 (DRY — Part 3).
     why it is exception-safe.
 
     YOUR ANSWER:
+    The duplicated code was the whole allocate-and-copy block:
+    `_name = user._name; _size = user._size; _capacity = user._capacity;`
+    plus `_friends = new std::string[_capacity];` and the
+    `for (size_t i = 0; i < _size; ++i) _friends[i] = user._friends[i];`
+    loop, which appeared verbatim in both the copy constructor and the
+    copy assignment (the assignment additionally had to `delete[]` the
+    old array first). I chose the copy-and-swap idiom: copy assignment
+    takes its parameter by value (invoking the copy constructor) and
+    swaps members with a private `swap(User&) noexcept`, so the copying
+    logic lives only in the copy constructor. It is exception-safe
+    because if copying the argument throws, `*this` is never touched;
+    once the copy succeeds, `swap` is noexcept, so the strong guarantee
+    holds. (In my final code this logic has since moved into FriendList
+    and then disappeared entirely — see Q3.)
 
 
 Q2 (SRP — Part 4).
@@ -19,6 +33,19 @@ Q2 (SRP — Part 4).
     keep hand-written and why?
 
     YOUR ANSWER:
+    At the end of Part 3, `User` was responsible for: (1) knowing a
+    user's `_name` and (2) representing a person on the network — the
+    genuine `User` concerns; plus (3) owning the `std::string*`
+    `_friends` array, (4) growing it on `add_friend`, (5) deep-copying
+    it in the copy ctor/assignment, (6) releasing it in the destructor,
+    and (7) iterating it for printing — all of which belong to
+    `FriendList`. After the extraction, `User`'s destructor, copy
+    constructor, and copy assignment all became `= default;` (they just
+    invoke `FriendList`'s and `std::string`'s SMFs), and the private
+    `swap`/copying helper disappeared entirely. The only hand-written
+    code left in `User` is behaviour, not memory management:
+    `add_friend` (one-line delegation), `operator+=`, `operator<`, and
+    `operator<<`, which delegates list printing to `FriendList`.
 
 
 Q3 (Rule of Zero — Part 6, if attempted).
@@ -29,3 +56,18 @@ Q3 (Rule of Zero — Part 6, if attempted).
     or the other in 2–4 sentences.
 
     YOUR ANSWER:
+    After Part 1, removing every SMF would be a disaster because `User`
+    owned a raw `std::string*`: the implicit destructor would leak the
+    array, and the implicit copy operations would shallow-copy the
+    pointer, causing double-frees and aliasing. After Part 6 every member
+    (`std::string _name` and `FriendList`, which itself only holds a
+    `std::vector<std::string>`) manages its own resources, so the
+    compiler-synthesised SMFs are correct with no hand-written code.
+    I deliberately kept the move SMFs deleted on `User`: a `User`
+    models a person's identity on the network, so moving one (leaving a
+    moved-from person behind) is a design error worth forbidding, while
+    cheap moves are still available inside `FriendList` where they are
+    an implementation detail. Note that with only a defaulted copy
+    constructor, `std::is_move_constructible_v<User>` would be true
+    (rvalues bind to `const User&`), so the explicit `= delete` is also
+    what actually prevents moving.

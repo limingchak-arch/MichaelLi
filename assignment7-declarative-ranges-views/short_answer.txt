@@ -5,21 +5,51 @@ Q1. Laziness. A views pipeline does no work until it is iterated. Give one
     concrete benefit of this for trim_whitespace versus a function that
     returns a trimmed std::string.
     YOUR ANSWER:
-
+    Because trim_whitespace is a lazy view, it performs zero allocation and
+    zero copying: it just stores iterators/predicates that refer back to the
+    original string. A function returning a trimmed std::string must eagerly
+    allocate a new buffer and copy every character, even if the caller only
+    looks at the first few characters or discards the result. With the view,
+    the cost is paid only for the elements actually iterated, and the caller
+    can keep composing more adaptors (e.g. take(3)) before any work happens.
 
 Q2. Concept subsumption. In Part 2, why does the random_access_range overload
     win for a std::vector, even though the vector also satisfies forward_range
     and bidirectional_range?
     YOUR ANSWER:
-
+    random_access_range is defined as bidirectional_range plus extra
+    requirements, and bidirectional_range in turn refines forward_range, so
+    the constraints form a subsumption chain: random_access_range subsumes
+    bidirectional_range, which subsumes forward_range. When several
+    constrained overloads are equally good matches, overload resolution
+    prefers the one whose constraint subsumes the others (the "more
+    constrained" template). So for std::vector the random_access_range
+    overload is the most specialized viable candidate and wins without any
+    ambiguity or manual tag dispatch.
 
 Q3. Lifetime of views. trim_whitespace produces a view that refers
     back to the original string. What goes wrong if the underlying string is
     destroyed (or modified) while the view is still in use?
     YOUR ANSWER:
-
+    The view only stores iterators into the original string; it owns nothing.
+    If the string is destroyed, iterating the view dereferences dangling
+    iterators — undefined behavior. If the string is modified (e.g. appended
+    to, causing reallocation, or shortened), the cached iterators may be
+    invalidated or point at different characters, so the view can return
+    garbage, lose the trimming boundaries, or again cause undefined behavior.
+    The rule of thumb: a view must not outlive (or observe mutations of) the
+    range it was created from.
 
 Q4. Declarative vs. imperative. Pick one of your four solutions and describe
     what the equivalent hand-written loop would look like. Which is easier to
     read, and why?
     YOUR ANSWER:
+    For valid_card, the imperative version would reverse-iterate with an
+    index, keep a parity flag (i % 2), branch to double every second digit,
+    subtract 9 when the doubled value exceeds 9, accumulate into a running
+    sum, and finally test sum % 10 == 0. That mixes four concerns (direction,
+    parity, doubling fix-up, summation) into one loop body, and off-by-one
+    errors in the parity logic are easy. The declarative version names each
+    step — reverse, stride, drop, transform, fold_left — so the code reads
+    exactly like the specification of the Luhn algorithm, and each piece can
+    be verified independently.

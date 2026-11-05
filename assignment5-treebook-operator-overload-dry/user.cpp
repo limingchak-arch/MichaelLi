@@ -5,9 +5,6 @@
  */
 User::User(const std::string& name)
   : _name(name)
-  , _friends(nullptr)
-  , _size(0)
-  , _capacity(0)
 {
 }
 
@@ -18,17 +15,7 @@ User::User(const std::string& name)
 void
 User::add_friend(const std::string& name)
 {
-  if (_size == _capacity) {
-    _capacity = 2 * _capacity + 1;
-    std::string* newFriends = new std::string[_capacity];
-    for (size_t i = 0; i < _size; ++i) {
-      newFriends[i] = _friends[i];
-    }
-    delete[] _friends;
-    _friends = newFriends;
-  }
-
-  _friends[_size++] = name;
+  _friends.add(name);
 }
 
 /**
@@ -46,7 +33,7 @@ User::get_name() const
 size_t
 User::size() const
 {
-  return _size;
+  return _friends.size();
 }
 
 /**
@@ -54,35 +41,39 @@ User::size() const
  * @param index The index of the friend to set.
  * @param name The name to set the friend to.
  */
-void User::set_friend(size_t index, const std::string& name)
+void
+User::set_friend(size_t index, const std::string& name)
 {
-  _friends[index] = name;
+  _friends.set(index, name);
 }
 
-/** 
- * STUDENT TODO:
- * The definitions for your custom operators and special member functions will go here!
+/**
+ * Adds rhs to this user's friend list, and this user to rhs's list
+ * (friending is symmetric). Returns a reference to this user.
  */
-User& User::operator+=(User& other) {
-  add_friend(other.get_name());
-  other.add_friend(_name);
-  
+User&
+User::operator+=(User& rhs)
+{
+  add_friend(rhs._name);
+  rhs.add_friend(_name);
   return *this;
 }
 
-bool User::operator<(const User& other) const {
+/**
+ * Compares users alphabetically by name.
+ */
+bool
+User::operator<(const User& other) const
+{
   return _name < other._name;
 }
 
- std::ostream& operator<<(std::ostream& os, const User& user) {
-  os << "User(name="  << user._name << ",[";
-  for (int i = 0; i < user._size; i++) {
-    os << user._friends[i];
-    if (i != user._size - 1) {
-      os << ", ";
-    }
-  }
-  os << "])";
-
-  return os;
+/**
+ * Prints a user in the format:
+ *   User(name=Alice, friends=[Bob, Charlie])
+ */
+std::ostream&
+operator<<(std::ostream& os, const User& user)
+{
+  return os << "User(name=" << user._name << ", friends=" << user._friends << ")";
 }

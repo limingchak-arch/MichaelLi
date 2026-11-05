@@ -1,0 +1,233 @@
+Analysis of sampling main_prof (pid 95670) every 1 millisecond
+Process:         main_prof [95670]
+Path:            /Users/USER/*/main_prof
+Load Address:    0x102920000
+Identifier:      main_prof
+Version:         ???
+Code Type:       ARM64
+Parent Process:  zsh [95650]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:11:23.106 +0800
+Launch Time:     2026-11-05 14:11:23.074 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+    303 Thread_33557996: Main Thread
+    + 300 _dyld_start  (in dyld) + 0  [0x1029c89c0]
+    + 2 start  (in dyld) + 6904  [0x18f9b848c]
+    + ! 2 dyld4::start(dyld4::KernelArgs*, void*, void*, unsigned long long)::$_1::operator()() const  (in dyld) + 320  [0x18f9b8b30]
+    + !   2 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 3996  [0x18f9b9ae8]
+    + !     2 dyld4::RuntimeState::notifyDebuggerLoad(std::span<dyld4::Loader const*, 18446744073709551615ul> const&)  (in dyld) + 528  [0x18f9c8c8c]
+    + !       1 dyld4::ExternallyViewableState::addImages(lsl::Allocator&, lsl::Allocator&, std::span<dyld4::ExternallyViewableState::ImageInfo, 18446744073709551615ul> const&)  (in dyld) + 588  [0x18f9d3a90]
+    + !       : 1 dyld4::ExternallyViewableState::generateAtlas(lsl::Allocator&)  (in dyld) + 104  [0x18f9d1918]
+    + !       :   1 dyld4::ExternallyViewableState::generateCompactInfo(lsl::Allocator&, AAREncoder&)  (in dyld) + 640  [0x18f9d1554]
+    + !       :     1 dyld4::Atlas::ProcessSnapshot::addImages(dyld4::RuntimeState*, lsl::Vector<AuthenticatedValue<dyld4::Loader const*>>&)  (in dyld) + 252  [0x18fa01fe8]
+    + !       :       1 dyld4::Atlas::Image::Image(dyld4::RuntimeState*, lsl::Allocator&, lsl::SharedPtr<dyld4::Atlas::Mapper>&, dyld4::Loader const*)  (in dyld) + 232  [0x18fa014c8]
+    + !       :         1 dyld4::FileRecord::FileRecord(dyld4::FileManager&, unsigned long long, unsigned long long, unsigned long long)  (in dyld) + 44  [0x18f9ebfc4]
+    + !       :           1 dyld4::FileManager::uuidForFileSystem(unsigned long long) const  (in dyld) + 172  [0x18f9ebab8]
+    + !       :             1 dyld4::FileManager::reloadFSInfos() const  (in dyld) + 348  [0x18f9eb7a4]
+    + !       :               1 <deduplicated_symbol>  (in dyld) + 8  [0x18f99e70c]
+    + !       1 dyld4::ExternallyViewableState::addImages(lsl::Allocator&, lsl::Allocator&, std::span<dyld4::ExternallyViewableState::ImageInfo, 18446744073709551615ul> const&)  (in dyld) + 1084  [0x18f9d3c80]
+    + !         1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x18f9d3524]
+    + !           1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x18fa19c90]
+    + !             1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x18fa19904]
+    + !               1 mach_msg_overwrite  (in dyld) + 244  [0x18fa3318c]
+    + !                 1 mach_msg2_internal  (in dyld) + 76  [0x18fa32fe4]
+    + !                   1 mach_msg2_trap  (in dyld) + 8  [0x18f99972c]
+    + 1 start  (in dyld) + 6008  [0x1029e410c]
+    +   1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2116  [0x1029fec54]
+    +     1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x1029ff524]
+    +       1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x102a45c90]
+    +         1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x102a45904]
+    +           1 mach_msg_overwrite  (in dyld) + 244  [0x102a5f18c]
+    +             1 mach_msg2_internal  (in dyld) + 76  [0x102a5efe4]
+    +               1 mach_msg2_trap  (in dyld) + 8  [0x1029c572c]
+    222 Thread_33557996   DispatchQueue_1: com.apple.main-thread  (serial)
+      222 start  (in dyld) + 6992  [0x18f9b84e4]
+        37 main  (in main_prof) + 128  [0x1029205b8]  main.cpp:244
+        ! 22 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        ! : 12 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96,84  [0x102921d28,0x102921d1c]  main.cpp:172
+        ! : 7 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        ! : | 7 <deduplicated_symbol>  (in main_prof) + 0,8  [0x102921340,0x102921348]
+        ! : 3 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 112  [0x102921d38]  main.cpp:171
+        ! 11 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        ! : 4 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 132,128,...  [0x102921b44,0x102921b40,...]  main.cpp:98
+        ! : 3 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 260  [0x102921bc4]  main.cpp:106
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 272  [0x102921bd0]  main.cpp:104
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! :   1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        !   2 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 128  [0x102921c80]  main.cpp:189
+        !   | 1 branchy_score(Packet const&, std::vector<int> const&)  (in main_prof) + 104  [0x102921dc8]  main.cpp:120
+        !   | 1 branchy_score(Packet const&, std::vector<int> const&)  (in main_prof) + 132  [0x102921de4]  main.cpp:135
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 96  [0x102921c60]  main.cpp:187
+        !   | 1 std::vector<Packet>::size[abi:nqe210106]() const  (in main_prof) + 24  [0x10292109c]  vector.h:388
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        !     1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 196  [0x102921ef8]  main.cpp:158
+        33 main  (in main_prof) + 184  [0x1029205f0]  main.cpp:244
+        ! 20 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        ! : 10 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        ! : | 10 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 8 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96,84,...  [0x102921d28,0x102921d1c,...]  main.cpp:172
+        ! : 2 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 112  [0x102921d38]  main.cpp:171
+        ! 9 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        ! : 3 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : | 3 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 132,140  [0x102921b44,0x102921b4c]  main.cpp:98
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        !   3 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        !   | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 140  [0x102921ec0]  main.cpp:159
+        !   | + 1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        !   | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 248  [0x102921f2c]  main.cpp:159
+        !   | + 1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        !   | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 248  [0x102921f2c]  main.cpp:159
+        !   1 branchy_score(Packet const&, std::vector<int> const&)  (in main_prof) + 204  [0x102921e2c]  main.cpp:150
+        33 main  (in main_prof) + 212  [0x10292060c]  main.cpp:244
+        ! 20 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        ! : 10 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        ! : | 10 <deduplicated_symbol>  (in main_prof) + 0,8  [0x102921340,0x102921348]
+        ! : 8 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96,84  [0x102921d28,0x102921d1c]  main.cpp:172
+        ! : 2 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 112  [0x102921d38]  main.cpp:171
+        ! 9 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        ! : 3 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : | 3 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 272  [0x102921bd0]  main.cpp:104
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 92  [0x102921b1c]  main.cpp:97
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 132  [0x102921b44]  main.cpp:98
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        !   2 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        !   | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 72  [0x102921e7c]  main.cpp:159
+        !   | + 1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        !   | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 248  [0x102921f2c]  main.cpp:159
+        !   |   1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 128  [0x102921c80]  main.cpp:189
+        !   | 1 branchy_score(Packet const&, std::vector<int> const&)  (in main_prof) + 104  [0x102921dc8]  main.cpp:120
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 60  [0x102921c3c]  main.cpp:194
+        33 main  (in main_prof) + 272  [0x102920648]  main.cpp:244
+        ! 20 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        ! : 9 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96,84  [0x102921d28,0x102921d1c]  main.cpp:172
+        ! : 8 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        ! : | 8 <deduplicated_symbol>  (in main_prof) + 0,8  [0x102921340,0x102921348]
+        ! : 3 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 112  [0x102921d38]  main.cpp:171
+        ! 9 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        ! : 3 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 132,140  [0x102921b44,0x102921b4c]  main.cpp:98
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        !   4 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        !     1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 268  [0x102921f40]  main.cpp:158
+        !     | 1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        !     1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 196  [0x102921ef8]  main.cpp:158
+        !     1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 280  [0x102921f4c]  main.cpp:159
+        !     | 1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        !     1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 68  [0x102921e78]  main.cpp:159
+        32 main  (in main_prof) + 156  [0x1029205d4]  main.cpp:244
+        ! 20 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        ! : 13 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96,84  [0x102921d28,0x102921d1c]  main.cpp:172
+        ! : 7 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        ! :   7 <deduplicated_symbol>  (in main_prof) + 0,8  [0x102921340,0x102921348]
+        ! 9 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        ! : 5 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : | 5 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 140  [0x102921b4c]  main.cpp:98
+        ! 3 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 116  [0x102921c74]  main.cpp:188
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 128  [0x102921c80]  main.cpp:189
+        !   | 1 branchy_score(Packet const&, std::vector<int> const&)  (in main_prof) + 104  [0x102921dc8]  main.cpp:120
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        !     1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 232  [0x102921f1c]  main.cpp:158
+        !       1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        32 main  (in main_prof) + 244  [0x10292062c]  main.cpp:244
+        ! 20 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        ! : 9 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96,84  [0x102921d28,0x102921d1c]  main.cpp:172
+        ! : 8 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        ! : | 8 <deduplicated_symbol>  (in main_prof) + 0,8  [0x102921340,0x102921348]
+        ! : 3 cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 112  [0x102921d38]  main.cpp:171
+        ! 9 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        ! : 3 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        ! : | 2 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        ! : 2 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 132  [0x102921b44]  main.cpp:98
+        ! 3 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 128  [0x102921c80]  main.cpp:189
+        !   | 1 branchy_score(Packet const&, std::vector<int> const&)  (in main_prof) + 156  [0x102921dfc]  main.cpp:138
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        !   | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 36  [0x102921e58]  main.cpp:154
+        !   |   1 std::vector<int>::size[abi:nqe210106]() const  (in main_prof) + 0  [0x10292172c]  vector.h:388
+        !   1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 60  [0x102921c3c]  main.cpp:194
+        10 main  (in main_prof) + 104  [0x1029205a0]  main.cpp:240
+        ! 10 std::vector<int>::vector[abi:nqe210106](unsigned long, int const&)  (in main_prof) + 100  [0x1029219d8]  vector.h:172
+        !   5 std::vector<int>::__construct_at_end(unsigned long, int const&)  (in main_prof) + 80  [0x102921a64]  vector.h:936
+        !   : 5 std::construct_at[abi:nqe210106]<int, int const&, int*>(int*, int const&)  (in main_prof) + 4  [0x102921ab8]  construct_at.h:38
+        !   4 std::vector<int>::__construct_at_end(unsigned long, int const&)  (in main_prof) + 64  [0x102921a54]  vector.h:936
+        !   : 4 <deduplicated_symbol>  (in main_prof) + 0  [0x102920c7c]
+        !   1 std::vector<int>::__construct_at_end(unsigned long, int const&)  (in main_prof) + 84  [0x102921a68]  vector.h:935
+        7 main  (in main_prof) + 312  [0x102920670]  main.cpp:256
+        ! 7 std::vector<int>::~vector[abi:nqe210106]()  (in main_prof) + 40  [0x102921f8c]  vector.h:262
+        !   7 std::vector<int>::__destroy_vector::operator()[abi:nqe210106]()  (in main_prof) + 32  [0x102921834]  vector.h:251
+        !     7 std::vector<int>::clear[abi:nqe210106]()  (in main_prof) + 36  [0x102921894]  vector.h:543
+        !       5 std::vector<int>::__base_destruct_at_end[abi:nqe210106](int*)  (in main_prof) + 60  [0x102921944]  vector.h:763
+        !       : 5 <deduplicated_symbol>  (in main_prof) + 0  [0x102920c7c]
+        !       1 std::vector<int>::__base_destruct_at_end[abi:nqe210106](int*)  (in main_prof) + 28  [0x102921924]  vector.h:762
+        !       1 std::vector<int>::__base_destruct_at_end[abi:nqe210106](int*)  (in main_prof) + 48  [0x102921938]  vector.h:763
+        !         1 <deduplicated_symbol>  (in main_prof) + 0  [0x102920c7c]
+        2 main  (in main_prof) + 60  [0x102920574]  main.cpp:236
+        ! 1 build_packets(int, int, int)  (in main_prof) + 52  [0x10292073c]  main.cpp:28
+        ! : 1 std::vector<Packet>::vector[abi:nqe210106](unsigned long)  (in main_prof) + 88  [0x102920b40]  vector.h:151
+        ! :   1 std::vector<Packet>::__construct_at_end(unsigned long)  (in main_prof) + 72  [0x102920c28]  vector.h:920
+        ! :     1 std::construct_at[abi:nqe210106]<Packet, Packet*>(Packet*)  (in main_prof) + 4  [0x1029210a8]  construct_at.h:38
+        ! 1 build_packets(int, int, int)  (in main_prof) + 100  [0x10292076c]  main.cpp:32
+        2 main  (in main_prof) + 76  [0x102920584]  main.cpp:238
+        ! 1 build_dependency_next(int)  (in main_prof) + 116  [0x1029208d4]  main.cpp:64
+        ! : 1 mix32(unsigned int)  (in main_prof) + 28  [0x102920acc]  main.cpp:22
+        ! 1 build_dependency_next(int)  (in main_prof) + 204  [0x10292092c]  main.cpp:70
+        !   1 <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        1 main  (in main_prof) + 328  [0x102920680]  main.cpp:256
+          1 std::vector<int>::~vector[abi:nqe210106]()  (in main_prof) + 40  [0x102921f8c]  vector.h:262
+            1 std::vector<int>::__destroy_vector::operator()[abi:nqe210106]()  (in main_prof) + 32  [0x102921834]  vector.h:251
+              1 std::vector<int>::clear[abi:nqe210106]()  (in main_prof) + 36  [0x102921894]  vector.h:543
+                1 std::vector<int>::__base_destruct_at_end[abi:nqe210106](int*)  (in main_prof) + 60  [0x102921944]  vector.h:763
+                  1 <deduplicated_symbol>  (in main_prof) + 0  [0x102920c7c]
+
+Total number in stack (recursive counted multiple, when >=5):
+        25       <deduplicated_symbol>  (in main_prof) + 0  [0x102921340]
+        6       cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 0  [0x102921cc8]  main.cpp:172
+        6       cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 96  [0x102921d28]  main.cpp:172
+        6       process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in main_prof) + 168  [0x102921ca8]  main.cpp:192
+        6       refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 0  [0x102921ac0]  main.cpp:98
+        6       refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 264  [0x102921bc8]  main.cpp:106
+        6       run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 112  [0x102920a64]  main.cpp:221
+        6       run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 52  [0x102920a28]  main.cpp:211
+        6       run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in main_prof) + 72  [0x102920a3c]  main.cpp:213
+        5       cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof) + 0  [0x102921cc8]  main.cpp:171
+        5       refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof) + 240  [0x102921bb0]  main.cpp:105
+
+Sort by top of stack, same collapsed (when >= 5):
+        _dyld_start  (in dyld)        300
+        <deduplicated_symbol>  (in main_prof)        95
+        cold_column_probe(std::vector<int> const&, int, int, int)  (in main_prof)        72
+        refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in main_prof)        30
+        branchy_score(Packet const&, std::vector<int> const&)  (in main_prof)        6
+        std::construct_at[abi:nqe210106]<int, int const&, int*>(int*, int const&)  (in main_prof)        5
+
+Binary images description not available
+

@@ -1,0 +1,70 @@
+Analysis of sampling grid_bfs (pid 93505) every 1 millisecond
+Process:         grid_bfs [93505]
+Path:            /Users/USER/*/grid_bfs
+Load Address:    0x104b5c000
+Identifier:      grid_bfs
+Version:         ???
+Code Type:       ARM64
+Parent Process:  zsh [93425]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:07:21.498 +0800
+Launch Time:     2026-11-05 14:07:21.473 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+    303 Thread_33547678: Main Thread
+    + 300 _dyld_start  (in dyld) + 0  [0x104e9c9c0]
+    + 2 start  (in dyld) + 6904  [0x18f9b848c]
+    + ! 2 dyld4::start(dyld4::KernelArgs*, void*, void*, unsigned long long)::$_1::operator()() const  (in dyld) + 320  [0x18f9b8b30]
+    + !   2 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 3996  [0x18f9b9ae8]
+    + !     2 dyld4::RuntimeState::notifyDebuggerLoad(std::span<dyld4::Loader const*, 18446744073709551615ul> const&)  (in dyld) + 528  [0x18f9c8c8c]
+    + !       2 dyld4::ExternallyViewableState::addImages(lsl::Allocator&, lsl::Allocator&, std::span<dyld4::ExternallyViewableState::ImageInfo, 18446744073709551615ul> const&)  (in dyld) + 1084  [0x18f9d3c80]
+    + !         2 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x18f9d3524]
+    + !           2 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x18fa19c90]
+    + !             2 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x18fa19904]
+    + !               2 mach_msg_overwrite  (in dyld) + 244  [0x18fa3318c]
+    + !                 2 mach_msg2_internal  (in dyld) + 76  [0x18fa32fe4]
+    + !                   2 mach_msg2_trap  (in dyld) + 8  [0x18f99972c]
+    + 1 start  (in dyld) + 6008  [0x104eb810c]
+    +   1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2116  [0x104ed2c54]
+    +     1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x104ed3524]
+    +       1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x104f19c90]
+    +         1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x104f19904]
+    +           1 mach_msg_overwrite  (in dyld) + 244  [0x104f3318c]
+    +             1 mach_msg2_internal  (in dyld) + 76  [0x104f32fe4]
+    +               1 mach_msg2_trap  (in dyld) + 8  [0x104e9972c]
+    386 Thread_33547678   DispatchQueue_1: com.apple.main-thread  (serial)
+      386 start  (in dyld) + 6992  [0x18f9b84e4]
+        306 main  (in grid_bfs) + 808  [0x104b5f3f8]  grid_bfs.cpp:503
+        ! 306 run_all_requests(std::vector<std::basic_string<char>> const&, std::vector<RouteRequest> const&, std::vector<int>&)  (in grid_bfs) + 260  [0x104b5da80]  grid_bfs.cpp:275
+        !   93 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 740,624,...  [0x104b5d398,0x104b5d324,...]  grid_bfs.cpp:239
+        !   68 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 340,388,...  [0x104b5d208,0x104b5d238,...]  grid_bfs.cpp:0
+        !   46 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 516  [0x104b5d2b8]  grid_bfs.cpp:236
+        !   43 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 584,464,...  [0x104b5d2fc,0x104b5d284,...]  grid_bfs.cpp:251
+        !   18 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 572,452,...  [0x104b5d2f0,0x104b5d278,...]  grid_bfs.cpp:247
+        !   17 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 568,448,...  [0x104b5d2ec,0x104b5d274,...]  grid_bfs.cpp:246
+        !   11 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 772,544,...  [0x104b5d3b8,0x104b5d2d4,...]  grid_bfs.cpp:242
+        !   6 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 736,620,...  [0x104b5d394,0x104b5d320,...]  grid_bfs.cpp:254
+        !   2 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 836  [0x104b5d3f8]  grid_bfs.cpp:253
+        !   1 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 356  [0x104b5d218]  grid_bfs.cpp:228
+        !   1 shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs) + 372  [0x104b5d228]  grid_bfs.cpp:231
+        79 main  (in grid_bfs) + 1300  [0x104b5f5e4]  grid_bfs.cpp:506
+        ! 78 compute_congestion_pressure(std::vector<int> const&, int, int, int)  (in grid_bfs) + 976,944,...  [0x104b5e358,0x104b5e338,...]  grid_bfs.cpp:384
+        ! 1 compute_congestion_pressure(std::vector<int> const&, int, int, int)  (in grid_bfs) + 864  [0x104b5e2e8]  grid_bfs.cpp:378
+        1 main  (in grid_bfs) + 720  [0x104b5f3a0]  grid_bfs.cpp:500
+          1 generate_grid(int, int)  (in grid_bfs) + 644  [0x104b5c8a0]  grid_bfs.cpp:92
+            1 std::uniform_int_distribution<int>::operator()<std::mersenne_twister_engine<unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u>>(std::mersenne_twister_engine<unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u>&, std::uniform_int_distribution<int>::param_type const&)  (in grid_bfs) + 136  [0x104b5fad0]  uniform_int_distribution.h:227
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+        shortest_path_bfs(std::vector<std::basic_string<char>> const&, RouteRequest const&, std::vector<int>&)  (in grid_bfs)        306
+        _dyld_start  (in dyld)        300
+        compute_congestion_pressure(std::vector<int> const&, int, int, int)  (in grid_bfs)        79
+
+Binary images description not available
+

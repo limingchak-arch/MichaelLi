@@ -1,0 +1,16 @@
+grid = 260 x 260
+open_cells = 51400
+requests = 1200
+reachable = 1182
+unreachable = 18
+average_distance = 180.002
+route_label_checksum = 16916932106541079682
+heatmap_total_visits = 32813338
+heatmap_active_cells = 51169
+heatmap_max_visits = 962
+heatmap_threshold_checksum = 16893359133801811161
+congestion_passes = 4096
+congestion_total_pressure = 3699909
+congestion_max_pressure = 173
+congestion_pressure_checksum = 2463005136280950131
+time_sec = 0.453525

@@ -4,22 +4,49 @@ Assignment 7: Parallel Letter Frequency — short answers
 Q1. Data races. What exactly is a data race, and why would having all worker
     threads write into one shared std::unordered_map be undefined behaviour —
     even if you "got the right answer" once?
-    YOUR ANSWER:
+    YOUR ANSWER: A data race occurs when two threads access the same memory
+    location concurrently, at least one of them writing, with no
+    synchronization. std::unordered_map is not thread-safe, so concurrent
+    insertions race on its internal buckets and rehashing, which the C++
+    standard declares undefined behaviour — a "correct" run is pure luck,
+    since the schedule that corrupted the structure simply didn't happen
+    that time. That is why my implementation gives each worker its own
+    local map and only merges after join(), so the parallel phase touches
+    no shared mutable state at all.
 
 
 Q2. Why the merge is sequential. Your workers run in parallel but the final
     merge of partial maps runs on one thread. Why is that the right call here,
     and when (if ever) would it become a bottleneck?
-    YOUR ANSWER:
+    YOUR ANSWER: The merge is tiny compared to the counting: it adds up at
+    most 26 letter counts per worker, whereas the workers scan millions of
+    characters. Because the merge only runs after all workers have joined,
+    it touches each partial map with no concurrent writers, so it needs no
+    locks and is trivially correct. It would only become a bottleneck if the
+    per-worker maps were huge (a giant key space instead of 26 letters) or
+    if the number of workers grew enormously while the texts stayed small.
 
 
 Q3. std::launch::async vs deferred. What is the difference between
     std::async(std::launch::async, f) and std::async(f)? Why does it matter
     for this assignment?
-    YOUR ANSWER:
+    YOUR ANSWER: std::launch::async forces the task to run immediately on a
+    new thread, while plain std::async(f) lets the implementation choose
+    std::launch::deferred, which postpones the work until .get() is called
+    and then runs it on the calling thread. If the tasks were deferred, my
+    frequency_async loop would collect futures first and the .get() calls
+    afterwards would execute every count sequentially — the "parallel"
+    version would silently be single-threaded. Passing std::launch::async
+    guarantees the concurrency this assignment is about.
 
 
 Q4. Thread cost. Spawning a thread per text would create thousands of threads
     for a large corpus. Why is that usually a bad idea, and what is the common
     fix?
-    YOUR ANSWER:
+    YOUR ANSWER: Each thread costs a stack (megabytes of virtual memory) plus
+    kernel scheduling overhead, and thousands of threads thrash the CPU with
+    context switches instead of doing work. The common fix is a thread pool:
+    a fixed number of workers (typically hardware_concurrency) that pull
+    tasks from a queue, so thread-creation cost is paid once. This is exactly
+    why my frequency() partitions the texts across a bounded number of
+    workers instead of spawning one thread per text.

@@ -193,17 +193,30 @@ int shortest_path_bfs(const vector<string> &grid, const RouteRequest &request,
     int cols = static_cast<int>(grid[0].size());
     int total = rows * cols;
 
-    int *distance = new int[total];
-    std::fill(distance, distance + total, -1);
-    unsigned char *visited = new unsigned char[total]{};
-    vector<Point> frontier(static_cast<size_t>(total));
+    // Scratch buffers are reused across requests instead of being allocated
+    // (and leaked) per call. A generation stamp marks cells visited during the
+    // current request, so the full arrays no longer need to be cleared each
+    // call: a cell is "visited" only when its stamp matches this request.
+    static vector<int> distance;
+    static vector<int> visit_stamp;
+    static vector<Point> frontier;
+    static int current_stamp = 0;
+
+    if (static_cast<int>(distance.size()) != total) {
+        distance.assign(total, -1);
+        visit_stamp.assign(total, 0);
+        frontier.assign(static_cast<size_t>(total), {});
+        current_stamp = 0;
+    }
+    ++current_stamp;
+
     size_t frontier_head = 0;
     size_t frontier_tail = 0;
 
     int start_index = request.start.row * cols + request.start.col;
     int goal_index = request.goal.row * cols + request.goal.col;
 
-    visited[start_index] = 1;
+    visit_stamp[start_index] = current_stamp;
     distance[start_index] = 0;
     heatmap[start_index] += 1;
     frontier[frontier_tail++] = request.start;
@@ -231,11 +244,11 @@ int shortest_path_bfs(const vector<string> &grid, const RouteRequest &request,
             }
 
             int next_index = next_row * cols + next_col;
-            if (visited[next_index]) {
+            if (visit_stamp[next_index] == current_stamp) {
                 continue;
             }
 
-            visited[next_index] = 1;
+            visit_stamp[next_index] = current_stamp;
             distance[next_index] = distance[current_index] + 1;
             heatmap[next_index] += 1;
             frontier[frontier_tail++] = {next_row, next_col};
@@ -355,10 +368,13 @@ CongestionSummary compute_congestion_pressure(const vector<int> &heatmap,
     }
 
     for (int pass = 0; pass < congestion_passes; ++pass) {
-        for (int col = 1; col < cols - 1; ++col) {
-            for (int row = 1; row < rows - 1; ++row) {
-                int index = row * cols + col;
-
+        // Walk the row-major array in row-major order. Every cell update
+        // depends only on `current` (never on `next` of this pass), so the
+        // loop order does not change the result, but sequential accesses are
+        // cache- and prefetch-friendly instead of one cache line per cell.
+        for (int row = 1; row < rows - 1; ++row) {
+            int index = row * cols + 1;
+            for (int col = 1; col < cols - 1; ++col, ++index) {
                 int center = current[index];
                 int north = current[index - cols];
                 int south = current[index + cols];

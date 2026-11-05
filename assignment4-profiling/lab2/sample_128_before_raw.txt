@@ -1,0 +1,518 @@
+Sampling process 99887 for 1 second with 1 millisecond of run time between samples
+Couldn't find _sigtramp symbol in expected dylibs
+Found _sigtramp symbol after 5 tries
+Sampling completed, processing symbols...
+Sample analysis of process 99887 written to file /tmp/lab2_baseline_noinline_2026-11-05_142010_mM8Y.sample.txt
+
+Analysis of sampling lab2_baseline_noinline (pid 99887) every 1 millisecond
+Process:         lab2_baseline_noinline [99887]
+Path:            /private/tmp/lab2_baseline_noinline
+Load Address:    0x104f44000
+Identifier:      lab2_baseline_noinline
+Version:         ???
+Code Type:       ARM64
+Parent Process:  zsh [99873]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:20:10.052 +0800
+Launch Time:     2026-11-05 14:20:10.020 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+    307 Thread_33576326: Main Thread
+    + 302 _dyld_start  (in dyld) + 0  [0x104f789c0]
+    + 3 start  (in dyld) + 6904  [0x18f9b848c]
+    + ! 3 dyld4::start(dyld4::KernelArgs*, void*, void*, unsigned long long)::$_1::operator()() const  (in dyld) + 320  [0x18f9b8b30]
+    + !   2 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 3996  [0x18f9b9ae8]
+    + !   : 2 dyld4::RuntimeState::notifyDebuggerLoad(std::span<dyld4::Loader const*, 18446744073709551615ul> const&)  (in dyld) + 528  [0x18f9c8c8c]
+    + !   :   2 dyld4::ExternallyViewableState::addImages(lsl::Allocator&, lsl::Allocator&, std::span<dyld4::ExternallyViewableState::ImageInfo, 18446744073709551615ul> const&)  (in dyld) + 1084  [0x18f9d3c80]
+    + !   :     2 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x18f9d3524]
+    + !   :       2 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x18fa19c90]
+    + !   :         2 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x18fa19904]
+    + !   :           2 mach_msg_overwrite  (in dyld) + 244  [0x18fa3318c]
+    + !   :             2 mach_msg2_internal  (in dyld) + 76  [0x18fa32fe4]
+    + !   :               2 mach_msg2_trap  (in dyld) + 8  [0x18f99972c]
+    + !   1 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 1132  [0x18f9b8fb8]
+    + !     1 dyld4::JustInTimeLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 304  [0x18f9d8a04]
+    + !       1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !         1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !           1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !             1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !               1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                 1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                   1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                     1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                       1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                         1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                           1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                             1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                               1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                 1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                   1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                     1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                       1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                         1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                           1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                             1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                               1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                 1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                   1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                     1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                       1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                         1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                           1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                             1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                               1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                 1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                   1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                     1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                       1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                         1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                           1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                             1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                               1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                 1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                   1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                     1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                       1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                         1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                           1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                             1 dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+    + !                                                                                               1 dyld4::PrebuiltLoader::map(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&, bool) const  (in dyld) + 1132  [0x18fa0a434]
+    + 1 start  (in dyld) + 4700  [0x104f93bf0]
+    + ! 1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2292  [0x104faed04]
+    + !   1 PropertyList::~PropertyList()  (in dyld) + 108  [0x104fe3848]
+    + !     1 lsl::Allocator::free(void*)  (in dyld) + 60  [0x104ff419c]
+    + 1 start  (in dyld) + 6008  [0x104f9410c]
+    +   1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2116  [0x104faec54]
+    +     1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x104faf524]
+    +       1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x104ff5c90]
+    +         1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x104ff5904]
+    +           1 mach_msg_overwrite  (in dyld) + 244  [0x10500f18c]
+    +             1 mach_msg2_internal  (in dyld) + 76  [0x10500efe4]
+    +               1 mach_msg2_trap  (in dyld) + 8  [0x104f7572c]
+    40 Thread_33576326   DispatchQueue_1: com.apple.main-thread  (serial)
+      40 start  (in dyld) + 6992  [0x18f9b84e4]
+        6 main  (in lab2_baseline_noinline) + 128  [0x104f445b8]  lab2_baseline.cpp:244
+        ! 5 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+        ! : 3 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        ! : | 2 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 104,172  [0x104f45e9c,0x104f45ee0]  lab2_baseline.cpp:159
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 72  [0x104f45e7c]  lab2_baseline.cpp:159
+        ! : |   1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : 1 branchy_score(Packet const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 204  [0x104f45e2c]  lab2_baseline.cpp:150
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 60  [0x104f45c3c]  lab2_baseline.cpp:194
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        !   1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in lab2_baseline_noinline) + 176  [0x104f45b70]  lab2_baseline.cpp:95
+        !     1 std::vector<Packet>::size[abi:nqe210106]() const  (in lab2_baseline_noinline) + 24  [0x104f4509c]  vector.h:388
+        6 main  (in lab2_baseline_noinline) + 184  [0x104f445f0]  lab2_baseline.cpp:244
+        ! 5 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+        ! : 3 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 56  [0x104f45e6c]  lab2_baseline.cpp:158
+        ! : | + 1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 52  [0x104f45e68]  lab2_baseline.cpp:158
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 104  [0x104f45e9c]  lab2_baseline.cpp:159
+        ! : 2 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 128  [0x104f45c80]  lab2_baseline.cpp:189
+        ! :   1 branchy_score(Packet const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 124  [0x104f45ddc]  lab2_baseline.cpp:126
+        ! :   1 branchy_score(Packet const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 148  [0x104f45df4]  lab2_baseline.cpp:133
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        !   1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in lab2_baseline_noinline) + 128  [0x104f45b40]  lab2_baseline.cpp:98
+        !     1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        6 main  (in lab2_baseline_noinline) + 212  [0x104f4460c]  lab2_baseline.cpp:244
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+        ! : 3 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 56  [0x104f45e6c]  lab2_baseline.cpp:158
+        ! : | + 1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 160  [0x104f45ed4]  lab2_baseline.cpp:158
+        ! : | + 1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 280  [0x104f45f4c]  lab2_baseline.cpp:159
+        ! : |   1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 92  [0x104f45c5c]  lab2_baseline.cpp:187
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in lab2_baseline_noinline) + 176  [0x104f45b70]  lab2_baseline.cpp:95
+        ! :   1 std::vector<Packet>::size[abi:nqe210106]() const  (in lab2_baseline_noinline) + 24  [0x104f4509c]  vector.h:388
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 112  [0x104f44a64]  lab2_baseline.cpp:221
+        !   1 cold_column_probe(std::vector<int> const&, int, int, int)  (in lab2_baseline_noinline) + 96  [0x104f45d28]  lab2_baseline.cpp:172
+        6 main  (in lab2_baseline_noinline) + 272  [0x104f44648]  lab2_baseline.cpp:244
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+        ! : 2 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 36  [0x104f45e58]  lab2_baseline.cpp:154
+        ! : | + 1 std::vector<int>::size[abi:nqe210106]() const  (in lab2_baseline_noinline) + 0  [0x104f4572c]  vector.h:388
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 196  [0x104f45ef8]  lab2_baseline.cpp:158
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 96  [0x104f45c60]  lab2_baseline.cpp:187
+        ! : | 1 std::vector<Packet>::size[abi:nqe210106]() const  (in lab2_baseline_noinline) + 24  [0x104f4509c]  vector.h:388
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 128  [0x104f45c80]  lab2_baseline.cpp:189
+        ! :   1 branchy_score(Packet const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 148  [0x104f45df4]  lab2_baseline.cpp:133
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in lab2_baseline_noinline) + 240  [0x104f45bb0]  lab2_baseline.cpp:105
+        ! :   1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 112  [0x104f44a64]  lab2_baseline.cpp:221
+        !   1 cold_column_probe(std::vector<int> const&, int, int, int)  (in lab2_baseline_noinline) + 96  [0x104f45d28]  lab2_baseline.cpp:172
+        5 main  (in lab2_baseline_noinline) + 156  [0x104f445d4]  lab2_baseline.cpp:244
+        ! 4 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+        ! : 3 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 160  [0x104f45ed4]  lab2_baseline.cpp:158
+        ! : | + 1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 196  [0x104f45ef8]  lab2_baseline.cpp:158
+        ! : | + 1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 140  [0x104f45ec0]  lab2_baseline.cpp:159
+        ! : |   1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 128  [0x104f45c80]  lab2_baseline.cpp:189
+        ! :   1 branchy_score(Packet const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 148  [0x104f45df4]  lab2_baseline.cpp:133
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        !   1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in lab2_baseline_noinline) + 132  [0x104f45b44]  lab2_baseline.cpp:98
+        5 main  (in lab2_baseline_noinline) + 244  [0x104f4462c]  lab2_baseline.cpp:244
+        ! 3 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 96  [0x104f45c60]  lab2_baseline.cpp:187
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        ! : | 1 chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 232  [0x104f45f1c]  lab2_baseline.cpp:158
+        ! : |   1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! : 1 process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:193
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        ! : 1 refresh_history(std::vector<int>&, std::vector<Packet> const&, int)  (in lab2_baseline_noinline) + 240  [0x104f45bb0]  lab2_baseline.cpp:105
+        ! 1 run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 112  [0x104f44a64]  lab2_baseline.cpp:221
+        !   1 cold_column_probe(std::vector<int> const&, int, int, int)  (in lab2_baseline_noinline) + 96  [0x104f45d28]  lab2_baseline.cpp:172
+        2 main  (in lab2_baseline_noinline) + 60  [0x104f44574]  lab2_baseline.cpp:236
+        ! 1 build_packets(int, int, int)  (in lab2_baseline_noinline) + 52  [0x104f4473c]  lab2_baseline.cpp:28
+        ! : 1 std::vector<Packet>::vector[abi:nqe210106](unsigned long)  (in lab2_baseline_noinline) + 88  [0x104f44b40]  vector.h:151
+        ! :   1 std::vector<Packet>::__construct_at_end(unsigned long)  (in lab2_baseline_noinline) + 72  [0x104f44c28]  vector.h:920
+        ! :     1 std::construct_at[abi:nqe210106]<Packet, Packet*>(Packet*)  (in lab2_baseline_noinline) + 4  [0x104f450a8]  construct_at.h:38
+        ! 1 build_packets(int, int, int)  (in lab2_baseline_noinline) + 144  [0x104f44798]  lab2_baseline.cpp:40
+        2 main  (in lab2_baseline_noinline) + 76  [0x104f44584]  lab2_baseline.cpp:238
+        ! 1 build_dependency_next(int)  (in lab2_baseline_noinline) + 140  [0x104f448ec]  lab2_baseline.cpp:66
+        ! : 1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        ! 1 build_dependency_next(int)  (in lab2_baseline_noinline) + 204  [0x104f4492c]  lab2_baseline.cpp:70
+        !   1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        1 main  (in lab2_baseline_noinline) + 104  [0x104f445a0]  lab2_baseline.cpp:240
+        ! 1 std::vector<int>::vector[abi:nqe210106](unsigned long, int const&)  (in lab2_baseline_noinline) + 100  [0x104f459d8]  vector.h:172
+        !   1 std::vector<int>::__construct_at_end(unsigned long, int const&)  (in lab2_baseline_noinline) + 80  [0x104f45a64]  vector.h:936
+        !     1 std::construct_at[abi:nqe210106]<int, int const&, int*>(int*, int const&)  (in lab2_baseline_noinline) + 4  [0x104f45ab8]  construct_at.h:38
+        1 main  (in lab2_baseline_noinline) + 328  [0x104f44680]  lab2_baseline.cpp:256
+          1 std::vector<int>::~vector[abi:nqe210106]()  (in lab2_baseline_noinline) + 40  [0x104f45f8c]  vector.h:262
+            1 std::vector<int>::__destroy_vector::operator()[abi:nqe210106]()  (in lab2_baseline_noinline) + 32  [0x104f45834]  vector.h:251
+              1 std::vector<int>::clear[abi:nqe210106]()  (in lab2_baseline_noinline) + 36  [0x104f45894]  vector.h:543
+                1 std::vector<int>::__base_destruct_at_end[abi:nqe210106](int*)  (in lab2_baseline_noinline) + 60  [0x104f45944]  vector.h:763
+                  1 <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f44c7c]
+
+Total number in stack (recursive counted multiple, when >=5):
+        44       dyld4::PrebuiltLoader::loadDependents(Diagnostics&, dyld4::RuntimeState&, dyld4::Loader::LoadOptions const&)  (in dyld) + 424  [0x18fa0a614]
+        13       <deduplicated_symbol>  (in lab2_baseline_noinline) + 0  [0x104f45340]
+        6       process_packets(std::vector<Packet> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline) + 168  [0x104f45ca8]  lab2_baseline.cpp:192
+        6       run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 52  [0x104f44a28]  lab2_baseline.cpp:211
+        6       run_epoch(std::vector<Packet>&, std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int)  (in lab2_baseline_noinline) + 72  [0x104f44a3c]  lab2_baseline.cpp:213
+
+Sort by top of stack, same collapsed (when >= 5):
+        _dyld_start  (in dyld)        302
+        <deduplicated_symbol>  (in lab2_baseline_noinline)        14
+        branchy_score(Packet const&, std::vector<int> const&)  (in lab2_baseline_noinline)        5
+        chase_dependency(int, int, std::vector<int> const&, std::vector<int> const&)  (in lab2_baseline_noinline)        5
+
+Binary images description not available
+
+
+Sampling process 99893 for 1 second with 1 millisecond of run time between samples
+Sampling completed, processing symbols...
+Sample analysis of process 99893 written to file /tmp/lab2_baseline_noinline_2026-11-05_142010_6aPi.sample.txt
+
+Analysis of sampling lab2_baseline_noinline (pid 99893) every 1 millisecond
+Process:         lab2_baseline_noinline [99893]
+Path:            /private/tmp/lab2_baseline_noinline
+Load Address:    0x104948000
+Identifier:      lab2_baseline_noinline
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [99873]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:20:10.542 +0800
+Launch Time:     2026-11-05 14:20:10.511 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+
+Binary Images:
+       0x104948000 -        0x10494aa77 +lab2_baseline_noinline (0) <04EC385A-054F-3FB1-AB03-DFFBE8091D89> /tmp/lab2_baseline_noinline
+       0x18f910000 -        0x18f962b4b  libobjc.A.dylib (951.7) <03BD9E32-CF0A-37B0-898A-3CE8DE06D842> /usr/lib/libobjc.A.dylib
+       0x18f963000 -        0x18f997d58  libdyld.dylib (1387) <957F93B3-8805-39C7-9C51-EDD1715F550E> /usr/lib/system/libdyld.dylib
+       0x18f998000 -        0x18fa4b4ff  dyld (1.0.0 - 1387) <74E52480-C2BD-3C8D-812D-95FE2B74A096> /usr/lib/dyld
+       0x18fa4c000 -        0x18fa4f228  libsystem_blocks.dylib (96) <E0AC1231-27AA-3A13-8FAC-41D5802B1F3C> /usr/lib/system/libsystem_blocks.dylib
+       0x18fa50000 -        0x18faa455f  libxpc.dylib (3102.160.5) <33E44C2D-D65E-37A6-B85F-1A4CF524A050> /usr/lib/system/libxpc.dylib
+       0x18faa5000 -        0x18fac59ff  libsystem_trace.dylib (1861.160.4) <93F1DD8C-6CD9-32B9-B222-D23DA5D161B4> /usr/lib/system/libsystem_trace.dylib
+       0x18fac6000 -        0x18fb745f7  libcorecrypto.dylib (1922.160.10) <0642DDAD-4771-3C82-805C-E7C6701C1461> /usr/lib/system/libcorecrypto.dylib
+       0x18fb75000 -        0x18fbc5257  libsystem_malloc.dylib (812.160.5) <D969A907-3E43-3951-9365-8C2DB3812E9D> /usr/lib/system/libsystem_malloc.dylib
+       0x18fbc6000 -        0x18fc0d23f  libdispatch.dylib (1542.160.2) <B2000CD5-F580-314A-A141-E036719D854E> /usr/lib/system/libdispatch.dylib
+       0x18fc0e000 -        0x18fc10ffb  libsystem_featureflags.dylib (103) <FEE12F9C-344B-33B3-8EDD-283580EF1C67> /usr/lib/system/libsystem_featureflags.dylib
+       0x18fc11000 -        0x18fc921e7  libsystem_c.dylib (1752.160.4) <D77CEB62-AFF6-3CEC-BA9B-4F057FBE2EB5> /usr/lib/system/libsystem_c.dylib
+       0x18fc93000 -        0x18fd23ae7  libc++.1.dylib (2100.43) <F0FD393C-15BC-3C75-A19D-897F7B225C78> /usr/lib/libc++.1.dylib
+       0x18fd24000 -        0x18fd3e75f  libc++abi.dylib (2100.43) <F38A9C58-22AB-3798-BBAE-8DCD9CC0CE27> /usr/lib/libc++abi.dylib
+       0x18fd3f000 -        0x18fd7c2e7  libsystem_kernel.dylib (12377.161.14) <C6A4A4CB-92E6-3BAF-AAE0-E8306259209A> /usr/lib/system/libsystem_kernel.dylib
+       0x18fd7d000 -        0x18fd89b3b  libsystem_pthread.dylib (539.100.4) <A373F0B0-9880-326A-88B4-DD8BE4E33072> /usr/lib/system/libsystem_pthread.dylib
+       0x18fd8a000 -        0x18fd92963  libsystem_platform.dylib (375.120.2) <EDB83A19-EC17-32DE-9350-6145970A85D6> /usr/lib/system/libsystem_platform.dylib
+       0x18fd93000 -        0x18fdc26eb  libsystem_info.dylib (600) <9B5FB84B-31AD-3EA7-8F89-8C700D369DC8> /usr/lib/system/libsystem_info.dylib
+       0x193d60000 -        0x193d69e5f  libsystem_darwin.dylib (1752.160.4) <8E07D22E-CE5A-38A0-B091-5B0338C326F5> /usr/lib/system/libsystem_darwin.dylib
+       0x1941cb000 -        0x1941dd1b6  libsystem_notify.dylib (348.160.3) <15799128-6CBD-30D6-A2BB-B9D02B4470C0> /usr/lib/system/libsystem_notify.dylib
+       0x19649c000 -        0x1964b6f7b  libsystem_networkextension.dylib (2226.161.1) <9C7B1EEB-47BE-3791-93A9-CFC693CB9417> /usr/lib/system/libsystem_networkextension.dylib
+       0x196539000 -        0x196550fdf  libsystem_asl.dylib (406) <54439739-33EE-3273-839F-CBA67D7F5CB1> /usr/lib/system/libsystem_asl.dylib
+       0x1980f2000 -        0x1980fa387  libsystem_symptoms.dylib (2169.160.3) <229122B9-B8B1-3F2F-870E-8650AE3C4FB5> /usr/lib/system/libsystem_symptoms.dylib
+       0x19c397000 -        0x19c3cf5b7  libsystem_containermanager.dylib (725.160.3) <14B2A47F-19C8-392F-8FDB-FE8AE375DD41> /usr/lib/system/libsystem_containermanager.dylib
+       0x19d7a9000 -        0x19d7ad5d7  libsystem_configuration.dylib (1405.160.3) <D8D6280B-783D-3550-BDBA-2861AE40604F> /usr/lib/system/libsystem_configuration.dylib
+       0x19d7ae000 -        0x19d7b499f  libsystem_sandbox.dylib (2680.160.6) <54688162-B50D-3D31-A1E8-7B9766D3530D> /usr/lib/system/libsystem_sandbox.dylib
+       0x19ee09000 -        0x19ee0c1fb  libquarantine.dylib (196.160.2) <EEE5AADB-52E1-3C4C-881A-70405770B1F1> /usr/lib/system/libquarantine.dylib
+       0x19f5a8000 -        0x19f5aed03  libsystem_coreservices.dylib (191.5.1) <D4ACD2AC-5702-3C45-85A0-300B2C2D19E1> /usr/lib/system/libsystem_coreservices.dylib
+       0x19fb37000 -        0x19fb74a77  libsystem_m.dylib (3312.100.1) <B54FBE99-DB0B-32C7-ABDD-C2206DF606A4> /usr/lib/system/libsystem_m.dylib
+       0x19fb76000 -        0x19fb79527  libmacho.dylib (1387) <949131E5-BDA2-39BA-AA50-62651BB51802> /usr/lib/system/libmacho.dylib
+       0x19fb93000 -        0x19fba03a7  libcommonCrypto.dylib (600035) <3B110564-5278-3CB0-85F1-2CE8431FF935> /usr/lib/system/libcommonCrypto.dylib
+       0x19fba1000 -        0x19fbaaca3  libunwind.dylib (2100.2) <05FD0014-55B1-3B8A-A6BA-6C7A389C4123> /usr/lib/system/libunwind.dylib
+       0x19fbb3000 -        0x19fbbdbef  libcopyfile.dylib (240.160.2.0.1) <D0009B8A-8ECC-3D56-9206-7E1839707F93> /usr/lib/system/libcopyfile.dylib
+       0x19fbbe000 -        0x19fbc1987  libcompiler_rt.dylib (103.3) <6FB345CA-7F5C-3263-A23F-143F7539FD8A> /usr/lib/system/libcompiler_rt.dylib
+       0x19fbc2000 -        0x19fbc678b  libsystem_collections.dylib (1752.160.4) <C8160BD2-5941-3DC0-BB40-F8C2B8156EC4> /usr/lib/system/libsystem_collections.dylib
+       0x19fbc7000 -        0x19fbca4cf  libsystem_secinit.dylib (168.100.7) <ECABC024-8F02-374A-BB7E-29437CEA2ABD> /usr/lib/system/libsystem_secinit.dylib
+       0x19fbcb000 -        0x19fbcdbf7  libremovefile.dylib (85.100.6) <7460B5AE-469A-36A0-A7EC-6C7D69628E86> /usr/lib/system/libremovefile.dylib
+       0x19fbce000 -        0x19fbcef27  libkeymgr.dylib (31) <7E863FCA-F3FF-32C7-8A8C-F983E946AFC3> /usr/lib/system/libkeymgr.dylib
+       0x19fbcf000 -        0x19fbd7e37  libsystem_dnssd.dylib (2881.160.4) <305F4398-E688-3384-B351-02D865EC8A04> /usr/lib/system/libsystem_dnssd.dylib
+       0x19fbd8000 -        0x19fbdd09b  libcache.dylib (95) <9CD7B1E1-3E47-339C-A193-2392E3E0ED23> /usr/lib/system/libcache.dylib
+       0x19fbde000 -        0x19fbdfce3  libSystem.B.dylib (1356) <4FED5EE2-5D3E-35B1-A170-9859C4B683BB> /usr/lib/libSystem.B.dylib
+       0x293ba1000 -        0x293ba8349  libRosetta.dylib (367.9) <0C7397C6-D747-31F2-8BC1-4096213BDE5C> /usr/lib/libRosetta.dylib
+       0x2957b4000 -        0x2957b7a4b  libsystem_darwindirectory.dylib (122) <971A4F65-493D-39F3-846D-0D33FA2769FD> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x2957b8000 -        0x2957c239b  libsystem_eligibility.dylib (319.160.17) <750CA446-92EA-3A56-9A7B-CC0841686C50> /usr/lib/system/libsystem_eligibility.dylib
+       0x2957c3000 -        0x2957ca88b  libsystem_sanitizers.dylib (26.1) <D88EC709-9AA8-3083-B22B-D3CB39678D71> /usr/lib/system/libsystem_sanitizers.dylib
+       0x2957cb000 -        0x2957cbbb7  libsystem_trial.dylib (474.2.18.2) <7194FF5B-A6C5-3D67-B00A-90209F10D603> /usr/lib/system/libsystem_trial.dylib
+
+Sampling process 99895 for 1 second with 1 millisecond of run time between samples
+Sampling completed, processing symbols...
+Sample analysis of process 99895 written to file /tmp/lab2_baseline_noinline_2026-11-05_142010_flxc.sample.txt
+
+Analysis of sampling lab2_baseline_noinline (pid 99895) every 1 millisecond
+Process:         lab2_baseline_noinline [99895]
+Path:            /private/tmp/lab2_baseline_noinline
+Load Address:    0x10288c000
+Identifier:      lab2_baseline_noinline
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [99873]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:20:10.602 +0800
+Launch Time:     2026-11-05 14:20:10.579 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+
+Binary Images:
+       0x10288c000 -        0x10288ea77 +lab2_baseline_noinline (0) <04EC385A-054F-3FB1-AB03-DFFBE8091D89> /tmp/lab2_baseline_noinline
+       0x18f910000 -        0x18f962b4b  libobjc.A.dylib (951.7) <03BD9E32-CF0A-37B0-898A-3CE8DE06D842> /usr/lib/libobjc.A.dylib
+       0x18f963000 -        0x18f997d58  libdyld.dylib (1387) <957F93B3-8805-39C7-9C51-EDD1715F550E> /usr/lib/system/libdyld.dylib
+       0x18f998000 -        0x18fa4b4ff  dyld (1.0.0 - 1387) <74E52480-C2BD-3C8D-812D-95FE2B74A096> /usr/lib/dyld
+       0x18fa4c000 -        0x18fa4f228  libsystem_blocks.dylib (96) <E0AC1231-27AA-3A13-8FAC-41D5802B1F3C> /usr/lib/system/libsystem_blocks.dylib
+       0x18fa50000 -        0x18faa455f  libxpc.dylib (3102.160.5) <33E44C2D-D65E-37A6-B85F-1A4CF524A050> /usr/lib/system/libxpc.dylib
+       0x18faa5000 -        0x18fac59ff  libsystem_trace.dylib (1861.160.4) <93F1DD8C-6CD9-32B9-B222-D23DA5D161B4> /usr/lib/system/libsystem_trace.dylib
+       0x18fac6000 -        0x18fb745f7  libcorecrypto.dylib (1922.160.10) <0642DDAD-4771-3C82-805C-E7C6701C1461> /usr/lib/system/libcorecrypto.dylib
+       0x18fb75000 -        0x18fbc5257  libsystem_malloc.dylib (812.160.5) <D969A907-3E43-3951-9365-8C2DB3812E9D> /usr/lib/system/libsystem_malloc.dylib
+       0x18fbc6000 -        0x18fc0d23f  libdispatch.dylib (1542.160.2) <B2000CD5-F580-314A-A141-E036719D854E> /usr/lib/system/libdispatch.dylib
+       0x18fc0e000 -        0x18fc10ffb  libsystem_featureflags.dylib (103) <FEE12F9C-344B-33B3-8EDD-283580EF1C67> /usr/lib/system/libsystem_featureflags.dylib
+       0x18fc11000 -        0x18fc921e7  libsystem_c.dylib (1752.160.4) <D77CEB62-AFF6-3CEC-BA9B-4F057FBE2EB5> /usr/lib/system/libsystem_c.dylib
+       0x18fc93000 -        0x18fd23ae7  libc++.1.dylib (2100.43) <F0FD393C-15BC-3C75-A19D-897F7B225C78> /usr/lib/libc++.1.dylib
+       0x18fd24000 -        0x18fd3e75f  libc++abi.dylib (2100.43) <F38A9C58-22AB-3798-BBAE-8DCD9CC0CE27> /usr/lib/libc++abi.dylib
+       0x18fd3f000 -        0x18fd7c2e7  libsystem_kernel.dylib (12377.161.14) <C6A4A4CB-92E6-3BAF-AAE0-E8306259209A> /usr/lib/system/libsystem_kernel.dylib
+       0x18fd7d000 -        0x18fd89b3b  libsystem_pthread.dylib (539.100.4) <A373F0B0-9880-326A-88B4-DD8BE4E33072> /usr/lib/system/libsystem_pthread.dylib
+       0x18fd8a000 -        0x18fd92963  libsystem_platform.dylib (375.120.2) <EDB83A19-EC17-32DE-9350-6145970A85D6> /usr/lib/system/libsystem_platform.dylib
+       0x18fd93000 -        0x18fdc26eb  libsystem_info.dylib (600) <9B5FB84B-31AD-3EA7-8F89-8C700D369DC8> /usr/lib/system/libsystem_info.dylib
+       0x193d60000 -        0x193d69e5f  libsystem_darwin.dylib (1752.160.4) <8E07D22E-CE5A-38A0-B091-5B0338C326F5> /usr/lib/system/libsystem_darwin.dylib
+       0x1941cb000 -        0x1941dd1b6  libsystem_notify.dylib (348.160.3) <15799128-6CBD-30D6-A2BB-B9D02B4470C0> /usr/lib/system/libsystem_notify.dylib
+       0x19649c000 -        0x1964b6f7b  libsystem_networkextension.dylib (2226.161.1) <9C7B1EEB-47BE-3791-93A9-CFC693CB9417> /usr/lib/system/libsystem_networkextension.dylib
+       0x196539000 -        0x196550fdf  libsystem_asl.dylib (406) <54439739-33EE-3273-839F-CBA67D7F5CB1> /usr/lib/system/libsystem_asl.dylib
+       0x1980f2000 -        0x1980fa387  libsystem_symptoms.dylib (2169.160.3) <229122B9-B8B1-3F2F-870E-8650AE3C4FB5> /usr/lib/system/libsystem_symptoms.dylib
+       0x19c397000 -        0x19c3cf5b7  libsystem_containermanager.dylib (725.160.3) <14B2A47F-19C8-392F-8FDB-FE8AE375DD41> /usr/lib/system/libsystem_containermanager.dylib
+       0x19d7a9000 -        0x19d7ad5d7  libsystem_configuration.dylib (1405.160.3) <D8D6280B-783D-3550-BDBA-2861AE40604F> /usr/lib/system/libsystem_configuration.dylib
+       0x19d7ae000 -        0x19d7b499f  libsystem_sandbox.dylib (2680.160.6) <54688162-B50D-3D31-A1E8-7B9766D3530D> /usr/lib/system/libsystem_sandbox.dylib
+       0x19ee09000 -        0x19ee0c1fb  libquarantine.dylib (196.160.2) <EEE5AADB-52E1-3C4C-881A-70405770B1F1> /usr/lib/system/libquarantine.dylib
+       0x19f5a8000 -        0x19f5aed03  libsystem_coreservices.dylib (191.5.1) <D4ACD2AC-5702-3C45-85A0-300B2C2D19E1> /usr/lib/system/libsystem_coreservices.dylib
+       0x19fb37000 -        0x19fb74a77  libsystem_m.dylib (3312.100.1) <B54FBE99-DB0B-32C7-ABDD-C2206DF606A4> /usr/lib/system/libsystem_m.dylib
+       0x19fb76000 -        0x19fb79527  libmacho.dylib (1387) <949131E5-BDA2-39BA-AA50-62651BB51802> /usr/lib/system/libmacho.dylib
+       0x19fb93000 -        0x19fba03a7  libcommonCrypto.dylib (600035) <3B110564-5278-3CB0-85F1-2CE8431FF935> /usr/lib/system/libcommonCrypto.dylib
+       0x19fba1000 -        0x19fbaaca3  libunwind.dylib (2100.2) <05FD0014-55B1-3B8A-A6BA-6C7A389C4123> /usr/lib/system/libunwind.dylib
+       0x19fbb3000 -        0x19fbbdbef  libcopyfile.dylib (240.160.2.0.1) <D0009B8A-8ECC-3D56-9206-7E1839707F93> /usr/lib/system/libcopyfile.dylib
+       0x19fbbe000 -        0x19fbc1987  libcompiler_rt.dylib (103.3) <6FB345CA-7F5C-3263-A23F-143F7539FD8A> /usr/lib/system/libcompiler_rt.dylib
+       0x19fbc2000 -        0x19fbc678b  libsystem_collections.dylib (1752.160.4) <C8160BD2-5941-3DC0-BB40-F8C2B8156EC4> /usr/lib/system/libsystem_collections.dylib
+       0x19fbc7000 -        0x19fbca4cf  libsystem_secinit.dylib (168.100.7) <ECABC024-8F02-374A-BB7E-29437CEA2ABD> /usr/lib/system/libsystem_secinit.dylib
+       0x19fbcb000 -        0x19fbcdbf7  libremovefile.dylib (85.100.6) <7460B5AE-469A-36A0-A7EC-6C7D69628E86> /usr/lib/system/libremovefile.dylib
+       0x19fbce000 -        0x19fbcef27  libkeymgr.dylib (31) <7E863FCA-F3FF-32C7-8A8C-F983E946AFC3> /usr/lib/system/libkeymgr.dylib
+       0x19fbcf000 -        0x19fbd7e37  libsystem_dnssd.dylib (2881.160.4) <305F4398-E688-3384-B351-02D865EC8A04> /usr/lib/system/libsystem_dnssd.dylib
+       0x19fbd8000 -        0x19fbdd09b  libcache.dylib (95) <9CD7B1E1-3E47-339C-A193-2392E3E0ED23> /usr/lib/system/libcache.dylib
+       0x19fbde000 -        0x19fbdfce3  libSystem.B.dylib (1356) <4FED5EE2-5D3E-35B1-A170-9859C4B683BB> /usr/lib/libSystem.B.dylib
+       0x293ba1000 -        0x293ba8349  libRosetta.dylib (367.9) <0C7397C6-D747-31F2-8BC1-4096213BDE5C> /usr/lib/libRosetta.dylib
+       0x2957b4000 -        0x2957b7a4b  libsystem_darwindirectory.dylib (122) <971A4F65-493D-39F3-846D-0D33FA2769FD> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x2957b8000 -        0x2957c239b  libsystem_eligibility.dylib (319.160.17) <750CA446-92EA-3A56-9A7B-CC0841686C50> /usr/lib/system/libsystem_eligibility.dylib
+       0x2957c3000 -        0x2957ca88b  libsystem_sanitizers.dylib (26.1) <D88EC709-9AA8-3083-B22B-D3CB39678D71> /usr/lib/system/libsystem_sanitizers.dylib
+       0x2957cb000 -        0x2957cbbb7  libsystem_trial.dylib (474.2.18.2) <7194FF5B-A6C5-3D67-B00A-90209F10D603> /usr/lib/system/libsystem_trial.dylib
+
+Sampling process 99897 for 1 second with 1 millisecond of run time between samples
+Sampling completed, processing symbols...
+Sample analysis of process 99897 written to file /tmp/lab2_baseline_noinline_2026-11-05_142010_1hH4.sample.txt
+
+Analysis of sampling lab2_baseline_noinline (pid 99897) every 1 millisecond
+Process:         lab2_baseline_noinline [99897]
+Path:            /private/tmp/lab2_baseline_noinline
+Load Address:    0x1048a4000
+Identifier:      lab2_baseline_noinline
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [99873]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:20:10.661 +0800
+Launch Time:     2026-11-05 14:20:10.639 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+
+Binary Images:
+       0x1048a4000 -        0x1048a6a77 +lab2_baseline_noinline (0) <04EC385A-054F-3FB1-AB03-DFFBE8091D89> /tmp/lab2_baseline_noinline
+       0x18f910000 -        0x18f962b4b  libobjc.A.dylib (951.7) <03BD9E32-CF0A-37B0-898A-3CE8DE06D842> /usr/lib/libobjc.A.dylib
+       0x18f963000 -        0x18f997d58  libdyld.dylib (1387) <957F93B3-8805-39C7-9C51-EDD1715F550E> /usr/lib/system/libdyld.dylib
+       0x18f998000 -        0x18fa4b4ff  dyld (1.0.0 - 1387) <74E52480-C2BD-3C8D-812D-95FE2B74A096> /usr/lib/dyld
+       0x18fa4c000 -        0x18fa4f228  libsystem_blocks.dylib (96) <E0AC1231-27AA-3A13-8FAC-41D5802B1F3C> /usr/lib/system/libsystem_blocks.dylib
+       0x18fa50000 -        0x18faa455f  libxpc.dylib (3102.160.5) <33E44C2D-D65E-37A6-B85F-1A4CF524A050> /usr/lib/system/libxpc.dylib
+       0x18faa5000 -        0x18fac59ff  libsystem_trace.dylib (1861.160.4) <93F1DD8C-6CD9-32B9-B222-D23DA5D161B4> /usr/lib/system/libsystem_trace.dylib
+       0x18fac6000 -        0x18fb745f7  libcorecrypto.dylib (1922.160.10) <0642DDAD-4771-3C82-805C-E7C6701C1461> /usr/lib/system/libcorecrypto.dylib
+       0x18fb75000 -        0x18fbc5257  libsystem_malloc.dylib (812.160.5) <D969A907-3E43-3951-9365-8C2DB3812E9D> /usr/lib/system/libsystem_malloc.dylib
+       0x18fbc6000 -        0x18fc0d23f  libdispatch.dylib (1542.160.2) <B2000CD5-F580-314A-A141-E036719D854E> /usr/lib/system/libdispatch.dylib
+       0x18fc0e000 -        0x18fc10ffb  libsystem_featureflags.dylib (103) <FEE12F9C-344B-33B3-8EDD-283580EF1C67> /usr/lib/system/libsystem_featureflags.dylib
+       0x18fc11000 -        0x18fc921e7  libsystem_c.dylib (1752.160.4) <D77CEB62-AFF6-3CEC-BA9B-4F057FBE2EB5> /usr/lib/system/libsystem_c.dylib
+       0x18fc93000 -        0x18fd23ae7  libc++.1.dylib (2100.43) <F0FD393C-15BC-3C75-A19D-897F7B225C78> /usr/lib/libc++.1.dylib
+       0x18fd24000 -        0x18fd3e75f  libc++abi.dylib (2100.43) <F38A9C58-22AB-3798-BBAE-8DCD9CC0CE27> /usr/lib/libc++abi.dylib
+       0x18fd3f000 -        0x18fd7c2e7  libsystem_kernel.dylib (12377.161.14) <C6A4A4CB-92E6-3BAF-AAE0-E8306259209A> /usr/lib/system/libsystem_kernel.dylib
+       0x18fd7d000 -        0x18fd89b3b  libsystem_pthread.dylib (539.100.4) <A373F0B0-9880-326A-88B4-DD8BE4E33072> /usr/lib/system/libsystem_pthread.dylib
+       0x18fd8a000 -        0x18fd92963  libsystem_platform.dylib (375.120.2) <EDB83A19-EC17-32DE-9350-6145970A85D6> /usr/lib/system/libsystem_platform.dylib
+       0x18fd93000 -        0x18fdc26eb  libsystem_info.dylib (600) <9B5FB84B-31AD-3EA7-8F89-8C700D369DC8> /usr/lib/system/libsystem_info.dylib
+       0x193d60000 -        0x193d69e5f  libsystem_darwin.dylib (1752.160.4) <8E07D22E-CE5A-38A0-B091-5B0338C326F5> /usr/lib/system/libsystem_darwin.dylib
+       0x1941cb000 -        0x1941dd1b6  libsystem_notify.dylib (348.160.3) <15799128-6CBD-30D6-A2BB-B9D02B4470C0> /usr/lib/system/libsystem_notify.dylib
+       0x19649c000 -        0x1964b6f7b  libsystem_networkextension.dylib (2226.161.1) <9C7B1EEB-47BE-3791-93A9-CFC693CB9417> /usr/lib/system/libsystem_networkextension.dylib
+       0x196539000 -        0x196550fdf  libsystem_asl.dylib (406) <54439739-33EE-3273-839F-CBA67D7F5CB1> /usr/lib/system/libsystem_asl.dylib
+       0x1980f2000 -        0x1980fa387  libsystem_symptoms.dylib (2169.160.3) <229122B9-B8B1-3F2F-870E-8650AE3C4FB5> /usr/lib/system/libsystem_symptoms.dylib
+       0x19c397000 -        0x19c3cf5b7  libsystem_containermanager.dylib (725.160.3) <14B2A47F-19C8-392F-8FDB-FE8AE375DD41> /usr/lib/system/libsystem_containermanager.dylib
+       0x19d7a9000 -        0x19d7ad5d7  libsystem_configuration.dylib (1405.160.3) <D8D6280B-783D-3550-BDBA-2861AE40604F> /usr/lib/system/libsystem_configuration.dylib
+       0x19d7ae000 -        0x19d7b499f  libsystem_sandbox.dylib (2680.160.6) <54688162-B50D-3D31-A1E8-7B9766D3530D> /usr/lib/system/libsystem_sandbox.dylib
+       0x19ee09000 -        0x19ee0c1fb  libquarantine.dylib (196.160.2) <EEE5AADB-52E1-3C4C-881A-70405770B1F1> /usr/lib/system/libquarantine.dylib
+       0x19f5a8000 -        0x19f5aed03  libsystem_coreservices.dylib (191.5.1) <D4ACD2AC-5702-3C45-85A0-300B2C2D19E1> /usr/lib/system/libsystem_coreservices.dylib
+       0x19fb37000 -        0x19fb74a77  libsystem_m.dylib (3312.100.1) <B54FBE99-DB0B-32C7-ABDD-C2206DF606A4> /usr/lib/system/libsystem_m.dylib
+       0x19fb76000 -        0x19fb79527  libmacho.dylib (1387) <949131E5-BDA2-39BA-AA50-62651BB51802> /usr/lib/system/libmacho.dylib
+       0x19fb93000 -        0x19fba03a7  libcommonCrypto.dylib (600035) <3B110564-5278-3CB0-85F1-2CE8431FF935> /usr/lib/system/libcommonCrypto.dylib
+       0x19fba1000 -        0x19fbaaca3  libunwind.dylib (2100.2) <05FD0014-55B1-3B8A-A6BA-6C7A389C4123> /usr/lib/system/libunwind.dylib
+       0x19fbb3000 -        0x19fbbdbef  libcopyfile.dylib (240.160.2.0.1) <D0009B8A-8ECC-3D56-9206-7E1839707F93> /usr/lib/system/libcopyfile.dylib
+       0x19fbbe000 -        0x19fbc1987  libcompiler_rt.dylib (103.3) <6FB345CA-7F5C-3263-A23F-143F7539FD8A> /usr/lib/system/libcompiler_rt.dylib
+       0x19fbc2000 -        0x19fbc678b  libsystem_collections.dylib (1752.160.4) <C8160BD2-5941-3DC0-BB40-F8C2B8156EC4> /usr/lib/system/libsystem_collections.dylib
+       0x19fbc7000 -        0x19fbca4cf  libsystem_secinit.dylib (168.100.7) <ECABC024-8F02-374A-BB7E-29437CEA2ABD> /usr/lib/system/libsystem_secinit.dylib
+       0x19fbcb000 -        0x19fbcdbf7  libremovefile.dylib (85.100.6) <7460B5AE-469A-36A0-A7EC-6C7D69628E86> /usr/lib/system/libremovefile.dylib
+       0x19fbce000 -        0x19fbcef27  libkeymgr.dylib (31) <7E863FCA-F3FF-32C7-8A8C-F983E946AFC3> /usr/lib/system/libkeymgr.dylib
+       0x19fbcf000 -        0x19fbd7e37  libsystem_dnssd.dylib (2881.160.4) <305F4398-E688-3384-B351-02D865EC8A04> /usr/lib/system/libsystem_dnssd.dylib
+       0x19fbd8000 -        0x19fbdd09b  libcache.dylib (95) <9CD7B1E1-3E47-339C-A193-2392E3E0ED23> /usr/lib/system/libcache.dylib
+       0x19fbde000 -        0x19fbdfce3  libSystem.B.dylib (1356) <4FED5EE2-5D3E-35B1-A170-9859C4B683BB> /usr/lib/libSystem.B.dylib
+       0x293ba1000 -        0x293ba8349  libRosetta.dylib (367.9) <0C7397C6-D747-31F2-8BC1-4096213BDE5C> /usr/lib/libRosetta.dylib
+       0x2957b4000 -        0x2957b7a4b  libsystem_darwindirectory.dylib (122) <971A4F65-493D-39F3-846D-0D33FA2769FD> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x2957b8000 -        0x2957c239b  libsystem_eligibility.dylib (319.160.17) <750CA446-92EA-3A56-9A7B-CC0841686C50> /usr/lib/system/libsystem_eligibility.dylib
+       0x2957c3000 -        0x2957ca88b  libsystem_sanitizers.dylib (26.1) <D88EC709-9AA8-3083-B22B-D3CB39678D71> /usr/lib/system/libsystem_sanitizers.dylib
+       0x2957cb000 -        0x2957cbbb7  libsystem_trial.dylib (474.2.18.2) <7194FF5B-A6C5-3D67-B00A-90209F10D603> /usr/lib/system/libsystem_trial.dylib
+
+Sampling process 99899 for 1 second with 1 millisecond of run time between samples
+Sampling completed, processing symbols...
+Sample analysis of process 99899 written to file /tmp/lab2_baseline_noinline_2026-11-05_142010_kcYv.sample.txt
+
+Analysis of sampling lab2_baseline_noinline (pid 99899) every 1 millisecond
+Process:         lab2_baseline_noinline [99899]
+Path:            /private/tmp/lab2_baseline_noinline
+Load Address:    0x1048c8000
+Identifier:      lab2_baseline_noinline
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [99873]
+Target Type:     live task
+
+Date/Time:       2026-11-05 14:20:10.731 +0800
+Launch Time:     2026-11-05 14:20:10.700 +0800
+OS Version:      macOS 26.6.2 (25G83)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+
+Binary Images:
+       0x1048c8000 -        0x1048caa77 +lab2_baseline_noinline (0) <04EC385A-054F-3FB1-AB03-DFFBE8091D89> /tmp/lab2_baseline_noinline
+       0x18f910000 -        0x18f962b4b  libobjc.A.dylib (951.7) <03BD9E32-CF0A-37B0-898A-3CE8DE06D842> /usr/lib/libobjc.A.dylib
+       0x18f963000 -        0x18f997d58  libdyld.dylib (1387) <957F93B3-8805-39C7-9C51-EDD1715F550E> /usr/lib/system/libdyld.dylib
+       0x18f998000 -        0x18fa4b4ff  dyld (1.0.0 - 1387) <74E52480-C2BD-3C8D-812D-95FE2B74A096> /usr/lib/dyld
+       0x18fa4c000 -        0x18fa4f228  libsystem_blocks.dylib (96) <E0AC1231-27AA-3A13-8FAC-41D5802B1F3C> /usr/lib/system/libsystem_blocks.dylib
+       0x18fa50000 -        0x18faa455f  libxpc.dylib (3102.160.5) <33E44C2D-D65E-37A6-B85F-1A4CF524A050> /usr/lib/system/libxpc.dylib
+       0x18faa5000 -        0x18fac59ff  libsystem_trace.dylib (1861.160.4) <93F1DD8C-6CD9-32B9-B222-D23DA5D161B4> /usr/lib/system/libsystem_trace.dylib
+       0x18fac6000 -        0x18fb745f7  libcorecrypto.dylib (1922.160.10) <0642DDAD-4771-3C82-805C-E7C6701C1461> /usr/lib/system/libcorecrypto.dylib
+       0x18fb75000 -        0x18fbc5257  libsystem_malloc.dylib (812.160.5) <D969A907-3E43-3951-9365-8C2DB3812E9D> /usr/lib/system/libsystem_malloc.dylib
+       0x18fbc6000 -        0x18fc0d23f  libdispatch.dylib (1542.160.2) <B2000CD5-F580-314A-A141-E036719D854E> /usr/lib/system/libdispatch.dylib
+       0x18fc0e000 -        0x18fc10ffb  libsystem_featureflags.dylib (103) <FEE12F9C-344B-33B3-8EDD-283580EF1C67> /usr/lib/system/libsystem_featureflags.dylib
+       0x18fc11000 -        0x18fc921e7  libsystem_c.dylib (1752.160.4) <D77CEB62-AFF6-3CEC-BA9B-4F057FBE2EB5> /usr/lib/system/libsystem_c.dylib
+       0x18fc93000 -        0x18fd23ae7  libc++.1.dylib (2100.43) <F0FD393C-15BC-3C75-A19D-897F7B225C78> /usr/lib/libc++.1.dylib
+       0x18fd24000 -        0x18fd3e75f  libc++abi.dylib (2100.43) <F38A9C58-22AB-3798-BBAE-8DCD9CC0CE27> /usr/lib/libc++abi.dylib
+       0x18fd3f000 -        0x18fd7c2e7  libsystem_kernel.dylib (12377.161.14) <C6A4A4CB-92E6-3BAF-AAE0-E8306259209A> /usr/lib/system/libsystem_kernel.dylib
+       0x18fd7d000 -        0x18fd89b3b  libsystem_pthread.dylib (539.100.4) <A373F0B0-9880-326A-88B4-DD8BE4E33072> /usr/lib/system/libsystem_pthread.dylib
+       0x18fd8a000 -        0x18fd92963  libsystem_platform.dylib (375.120.2) <EDB83A19-EC17-32DE-9350-6145970A85D6> /usr/lib/system/libsystem_platform.dylib
+       0x18fd93000 -        0x18fdc26eb  libsystem_info.dylib (600) <9B5FB84B-31AD-3EA7-8F89-8C700D369DC8> /usr/lib/system/libsystem_info.dylib
+       0x193d60000 -        0x193d69e5f  libsystem_darwin.dylib (1752.160.4) <8E07D22E-CE5A-38A0-B091-5B0338C326F5> /usr/lib/system/libsystem_darwin.dylib
+       0x1941cb000 -        0x1941dd1b6  libsystem_notify.dylib (348.160.3) <15799128-6CBD-30D6-A2BB-B9D02B4470C0> /usr/lib/system/libsystem_notify.dylib
+       0x19649c000 -        0x1964b6f7b  libsystem_networkextension.dylib (2226.161.1) <9C7B1EEB-47BE-3791-93A9-CFC693CB9417> /usr/lib/system/libsystem_networkextension.dylib
+       0x196539000 -        0x196550fdf  libsystem_asl.dylib (406) <54439739-33EE-3273-839F-CBA67D7F5CB1> /usr/lib/system/libsystem_asl.dylib
+       0x1980f2000 -        0x1980fa387  libsystem_symptoms.dylib (2169.160.3) <229122B9-B8B1-3F2F-870E-8650AE3C4FB5> /usr/lib/system/libsystem_symptoms.dylib
+       0x19c397000 -        0x19c3cf5b7  libsystem_containermanager.dylib (725.160.3) <14B2A47F-19C8-392F-8FDB-FE8AE375DD41> /usr/lib/system/libsystem_containermanager.dylib
+       0x19d7a9000 -        0x19d7ad5d7  libsystem_configuration.dylib (1405.160.3) <D8D6280B-783D-3550-BDBA-2861AE40604F> /usr/lib/system/libsystem_configuration.dylib
+       0x19d7ae000 -        0x19d7b499f  libsystem_sandbox.dylib (2680.160.6) <54688162-B50D-3D31-A1E8-7B9766D3530D> /usr/lib/system/libsystem_sandbox.dylib
+       0x19ee09000 -        0x19ee0c1fb  libquarantine.dylib (196.160.2) <EEE5AADB-52E1-3C4C-881A-70405770B1F1> /usr/lib/system/libquarantine.dylib
+       0x19f5a8000 -        0x19f5aed03  libsystem_coreservices.dylib (191.5.1) <D4ACD2AC-5702-3C45-85A0-300B2C2D19E1> /usr/lib/system/libsystem_coreservices.dylib
+       0x19fb37000 -        0x19fb74a77  libsystem_m.dylib (3312.100.1) <B54FBE99-DB0B-32C7-ABDD-C2206DF606A4> /usr/lib/system/libsystem_m.dylib
+       0x19fb76000 -        0x19fb79527  libmacho.dylib (1387) <949131E5-BDA2-39BA-AA50-62651BB51802> /usr/lib/system/libmacho.dylib
+       0x19fb93000 -        0x19fba03a7  libcommonCrypto.dylib (600035) <3B110564-5278-3CB0-85F1-2CE8431FF935> /usr/lib/system/libcommonCrypto.dylib
+       0x19fba1000 -        0x19fbaaca3  libunwind.dylib (2100.2) <05FD0014-55B1-3B8A-A6BA-6C7A389C4123> /usr/lib/system/libunwind.dylib
+       0x19fbb3000 -        0x19fbbdbef  libcopyfile.dylib (240.160.2.0.1) <D0009B8A-8ECC-3D56-9206-7E1839707F93> /usr/lib/system/libcopyfile.dylib
+       0x19fbbe000 -        0x19fbc1987  libcompiler_rt.dylib (103.3) <6FB345CA-7F5C-3263-A23F-143F7539FD8A> /usr/lib/system/libcompiler_rt.dylib
+       0x19fbc2000 -        0x19fbc678b  libsystem_collections.dylib (1752.160.4) <C8160BD2-5941-3DC0-BB40-F8C2B8156EC4> /usr/lib/system/libsystem_collections.dylib
+       0x19fbc7000 -        0x19fbca4cf  libsystem_secinit.dylib (168.100.7) <ECABC024-8F02-374A-BB7E-29437CEA2ABD> /usr/lib/system/libsystem_secinit.dylib
+       0x19fbcb000 -        0x19fbcdbf7  libremovefile.dylib (85.100.6) <7460B5AE-469A-36A0-A7EC-6C7D69628E86> /usr/lib/system/libremovefile.dylib
+       0x19fbce000 -        0x19fbcef27  libkeymgr.dylib (31) <7E863FCA-F3FF-32C7-8A8C-F983E946AFC3> /usr/lib/system/libkeymgr.dylib
+       0x19fbcf000 -        0x19fbd7e37  libsystem_dnssd.dylib (2881.160.4) <305F4398-E688-3384-B351-02D865EC8A04> /usr/lib/system/libsystem_dnssd.dylib
+       0x19fbd8000 -        0x19fbdd09b  libcache.dylib (95) <9CD7B1E1-3E47-339C-A193-2392E3E0ED23> /usr/lib/system/libcache.dylib
+       0x19fbde000 -        0x19fbdfce3  libSystem.B.dylib (1356) <4FED5EE2-5D3E-35B1-A170-9859C4B683BB> /usr/lib/libSystem.B.dylib
+       0x293ba1000 -        0x293ba8349  libRosetta.dylib (367.9) <0C7397C6-D747-31F2-8BC1-4096213BDE5C> /usr/lib/libRosetta.dylib
+       0x2957b4000 -        0x2957b7a4b  libsystem_darwindirectory.dylib (122) <971A4F65-493D-39F3-846D-0D33FA2769FD> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x2957b8000 -        0x2957c239b  libsystem_eligibility.dylib (319.160.17) <750CA446-92EA-3A56-9A7B-CC0841686C50> /usr/lib/system/libsystem_eligibility.dylib
+       0x2957c3000 -        0x2957ca88b  libsystem_sanitizers.dylib (26.1) <D88EC709-9AA8-3083-B22B-D3CB39678D71> /usr/lib/system/libsystem_sanitizers.dylib
+       0x2957cb000 -        0x2957cbbb7  libsystem_trial.dylib (474.2.18.2) <7194FF5B-A6C5-3D67-B00A-90209F10D603> /usr/lib/system/libsystem_trial.dylib
+

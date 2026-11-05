@@ -28,8 +28,13 @@
  *   - Ignore everything that is not an alphabetic character.
  */
 std::unordered_map<char, std::size_t> count_letters(std::string_view text) {
-  // STUDENT TODO: Implement this function.
-  throw std::runtime_error("Not implemented: count_letters");
+  std::unordered_map<char, std::size_t> counts;
+  for (unsigned char c : text) {
+    if (std::isalpha(c)) {
+      counts[static_cast<char>(std::tolower(c))] += 1;
+    }
+  }
+  return counts;
 }
 
 /* ------------------------------------------------------------------ *
@@ -46,8 +51,13 @@ std::unordered_map<char, std::size_t> count_letters(std::string_view text) {
  */
 std::unordered_map<char, std::size_t>
 frequency_seq(const std::vector<std::string_view>& texts) {
-  // STUDENT TODO: Implement this function.
-  throw std::runtime_error("Not implemented: frequency_seq");
+  std::unordered_map<char, std::size_t> combined;
+  for (std::string_view text : texts) {
+    for (const auto& [c, n] : count_letters(text)) {
+      combined[c] += n;
+    }
+  }
+  return combined;
 }
 
 /* ------------------------------------------------------------------ *
@@ -66,8 +76,49 @@ frequency_seq(const std::vector<std::string_view>& texts) {
  */
 std::unordered_map<char, std::size_t>
 frequency(const std::vector<std::string_view>& texts) {
-  // STUDENT TODO: Implement this function.
-  throw std::runtime_error("Not implemented: frequency");
+  const std::size_t n = texts.size();
+  if (n == 0) return {};
+
+  // Pick a worker count: hardware concurrency, but never more workers
+  // than there are texts (empty workers would just be wasted threads).
+  unsigned int hw = std::thread::hardware_concurrency();
+  const std::size_t workers =
+      std::max<std::size_t>(1, std::min<std::size_t>(hw == 0 ? 1 : hw, n));
+
+  // Pre-sized so threads only write into their OWN slot: no resizing,
+  // no shared mutable state, no mutex needed on the hot path.
+  std::vector<std::unordered_map<char, std::size_t>> partials(workers);
+  std::vector<std::thread> threads;
+  threads.reserve(workers);
+
+  // Partition the texts into `workers` contiguous chunks.
+  const std::size_t chunk = n / workers;
+  const std::size_t rem = n % workers; // first `rem` workers take one extra
+  std::size_t begin = 0;
+  for (std::size_t w = 0; w < workers; ++w) {
+    const std::size_t len = chunk + (w < rem ? 1 : 0);
+    const std::size_t end = begin + len;
+    threads.emplace_back([&texts, &partials, w, begin, end] {
+      std::unordered_map<char, std::size_t>& local = partials[w];
+      for (std::size_t i = begin; i < end; ++i) {
+        for (const auto& [c, n] : count_letters(texts[i])) {
+          local[c] += n;
+        }
+      }
+    });
+    begin = end;
+  }
+
+  for (auto& t : threads) t.join(); // join every thread before returning
+
+  // Sequential merge of the partial maps.
+  std::unordered_map<char, std::size_t> combined;
+  for (const auto& local : partials) {
+    for (const auto& [c, n] : local) {
+      combined[c] += n;
+    }
+  }
+  return combined;
 }
 
 /* ------------------------------------------------------------------ *
@@ -83,8 +134,22 @@ frequency(const std::vector<std::string_view>& texts) {
  */
 std::unordered_map<char, std::size_t>
 frequency_async(const std::vector<std::string_view>& texts) {
-  // STUDENT TODO: Implement this function.
-  throw std::runtime_error("Not implemented: frequency_async");
+  // std::launch::async forces each task onto its own thread (no deferred,
+  // lazy-on-get() execution). Futures give us the result as a return
+  // value, so no manual join() and no captured output variable.
+  std::vector<std::future<std::unordered_map<char, std::size_t>>> futures;
+  futures.reserve(texts.size());
+  for (std::string_view text : texts) {
+    futures.push_back(std::async(std::launch::async, count_letters, text));
+  }
+
+  std::unordered_map<char, std::size_t> combined;
+  for (auto& fut : futures) {
+    for (const auto& [c, n] : fut.get()) {
+      combined[c] += n;
+    }
+  }
+  return combined;
 }
 
 /* #### Please don't remove this line! #### */

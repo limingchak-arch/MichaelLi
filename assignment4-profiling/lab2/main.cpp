@@ -92,6 +92,11 @@ static std::vector<int> build_dependency_value(int n) {
 static void refresh_history(std::vector<int>& history, const std::vector<Packet>& packets, int history_cols) {
     int rows = (int)history.size() / history_cols;
 
+    // Note: the scatter updates below are inherently random-access (idx is
+    // data-dependent). A variant that applied packets in history-index order
+    // was tried and measured, but was slightly slower on the target machine
+    // (the one-time sort plus indirect packet reads outweighed the improved
+    // write locality), so the direct scatter is kept.
     for (std::size_t i = 0; i < packets.size(); ++i) {
         const Packet& p = packets[i];
         int idx = p.device_id * history_cols + (p.stamp % history_cols);
@@ -111,41 +116,16 @@ static void refresh_history(std::vector<int>& history, const std::vector<Packet>
 static int branchy_score(const Packet& p, const std::vector<int>& lane_weight) {
     int score = p.reading + lane_weight[p.lane];
     int x = p.reading ^ (p.quality << 2) ^ (p.kind * 97);
-        if (x & 1) {
-        score += 19;
-    } else {
-        score -= 7;
-    }
 
-    if (x & 2) {
-        score ^= p.quality;
-    } else {
-        score += p.kind * 3;
-    }
-
-    if (x & 4) {
-        score += p.reading >> 2;
-    } else {
-        score -= p.quality >> 3;
-    }
-
-    if (x & 8) {
-        score ^= p.device_id;
-    } else {
-        score += p.lane * 5;
-    }
-
-    if (x & 16) {
-        score += 31;
-    } else {
-        score -= 11;
-    }
-
-    if (x & 32) {
-        score ^= (p.reading << 1);
-    } else {
-        score += (p.quality & 15);
-    }
+    // Branchless: each condition is data-dependent and unpredictable, so the
+    // if/else chain caused branch mispredictions. Ternaries with the same
+    // semantics let the compiler emit conditional selects instead.
+    score += (x & 1) ? 19 : -7;
+    score = (x & 2) ? (score ^ p.quality) : (score + p.kind * 3);
+    score += (x & 4) ? (p.reading >> 2) : -(p.quality >> 3);
+    score = (x & 8) ? (score ^ p.device_id) : (score + p.lane * 5);
+    score += (x & 16) ? 31 : -11;
+    score = (x & 32) ? (score ^ (p.reading << 1)) : (score + (p.quality & 15));
 
     return score & 4095;
 }
@@ -163,14 +143,16 @@ static int chase_dependency(int start, int steps, const std::vector<int>& next, 
 }
 
 static int cold_column_probe(const std::vector<int>& history, int rows, int cols, int seed) {
+    // The original loop walked the row-major history buffer column by column
+    // (rotated by seed), one cache line per access. Because the rotation
+    // covers every column exactly once, each cell is summed exactly once, so
+    // the result does not depend on visit order. A single row-major sweep is
+    // sequential and prefetch-friendly and gives the identical sum.
+    (void)rows; (void)cols; (void)seed;
     int sum = 0;
-    int start_col = seed % cols;
 
-    for (int offset = 0; offset < cols; ++offset) {
-        int col = (start_col + offset) % cols;
-        for (int row = 0; row < rows; ++row) {
-            sum += history[row * cols + col] & 31;
-        }
+    for (int v : history) {
+        sum += v & 31;
     }
 
     return sum;

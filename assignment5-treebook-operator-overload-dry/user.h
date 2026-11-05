@@ -4,8 +4,12 @@
  * (originally by Fabio Ibanez, with modifications by Jacob Roberts-Baca).
  */
 
+#pragma once
+
 #include <iostream>
 #include <string>
+
+#include "friend_list.h"
 
 class User
 {
@@ -16,24 +20,23 @@ public:
   size_t size() const;
   void set_friend(size_t index, const std::string& name);
 
-  /** 
-   * STUDENT TODO:
-   * Your custom operators and special member functions will go here!   
-   **/
-  // Non member function using the friend keyword
-  friend std::ostream& operator<<(std::ostream& os, const User& user); 
-  bool operator<(const User& other) const;
-  User& operator+=(User &rhs); 
-
-  ~User();
-  User(const User& user);
-  User& operator=(const User& user);
+  /* Special member functions: User no longer manages any raw resources
+   * (all memory lives inside FriendList's std::vector), so the destructor,
+   * copy constructor and copy assignment are defaulted. Moves are still
+   * deleted: a User represents a person's identity on the network, so we
+   * deliberately forbid moving them (copies are allowed). */
+  ~User() = default;
+  User(const User& user) = default;
+  User& operator=(const User& user) = default;
   User(User&& user) = delete;
   User& operator=(User&& user) = delete;
 
+  // Non member function using the friend keyword
+  friend std::ostream& operator<<(std::ostream& os, const User& user);
+  bool operator<(const User& other) const;
+  User& operator+=(User& rhs);
+
 private:
   std::string _name;
-  std::string* _friends;
-  size_t _size;
-  size_t _capacity;
+  FriendList _friends;
 };

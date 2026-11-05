@@ -25,6 +25,23 @@
  * ------------------------------------------------------------------ */
 
 /**
+ * Shared helper: formats any range into `s` as "{a<delim>b<delim>c}".
+ * The trailing-delimiter problem is solved with std::exchange: the
+ * delimiter starts empty and is swapped in only after the first element.
+ */
+template <std::ranges::range Rng>
+std::ostream& format_range_with_delimiter(std::ostream& s, const Rng& rng,
+                                          const char* delim) {
+  s << '{';
+  const char* d = "";
+  for (const auto& elem : rng) {
+    s << std::exchange(d, delim) << elem;
+  }
+  s << '}';
+  return s;
+}
+
+/**
  * Formats any range into `s` as "{a,b,c}". An empty range prints "{}".
  * Requirements:
  *   - Constrain the template to `std::ranges::range`.
@@ -32,8 +49,7 @@
  */
 template <std::ranges::range Rng>
 std::ostream& format_range(std::ostream& s, const Rng& rng) {
-  // STUDENT TODO: Implement this function.
-  throw std::runtime_error("Not implemented: format_range");
+  return format_range_with_delimiter(s, rng, ",");
 }
 
 /* ------------------------------------------------------------------ *
@@ -53,20 +69,17 @@ std::ostream& format_range(std::ostream& s, const Rng& rng) {
  */
 template <std::ranges::forward_range Rng>
 std::ostream& format_categorized(std::ostream& s, const Rng& rng) {
-  // STUDENT TODO: Implement the forward-range overload (delimiter "->").
-  throw std::runtime_error("Not implemented: format_categorized (forward)");
+  return format_range_with_delimiter(s, rng, "->");
 }
 
 template <std::ranges::bidirectional_range Rng>
 std::ostream& format_categorized(std::ostream& s, const Rng& rng) {
-  // STUDENT TODO: Implement the bidirectional-range overload (delimiter "<=>").
-  throw std::runtime_error("Not implemented: format_categorized (bidirectional)");
+  return format_range_with_delimiter(s, rng, "<=>");
 }
 
 template <std::ranges::random_access_range Rng>
 std::ostream& format_categorized(std::ostream& s, const Rng& rng) {
-  // STUDENT TODO: Implement the random-access-range overload (delimiter ",").
-  throw std::runtime_error("Not implemented: format_categorized (random access)");
+  return format_range_with_delimiter(s, rng, ",");
 }
 
 /* ------------------------------------------------------------------ *
@@ -85,7 +98,14 @@ std::ostream& format_categorized(std::ostream& s, const Rng& rng) {
 // removes a leading run; std::views::reverse lets you reach the other end.
 // (The placeholder `std::views::all` compiles but does no trimming, so the
 // trim_whitespace tests will fail until you implement this.)
-inline constexpr auto trim_whitespace = std::views::all;
+inline constexpr auto is_space = [](unsigned char c) {
+  return std::isspace(c) != 0;
+};
+
+inline constexpr auto trim_whitespace = std::views::drop_while(is_space) |
+                                        std::views::reverse |
+                                        std::views::drop_while(is_space) |
+                                        std::views::reverse;
 
 /* ------------------------------------------------------------------ *
  * Part 4: valid_card (Luhn check)                                    *
@@ -103,8 +123,22 @@ inline constexpr auto trim_whitespace = std::views::all;
  */
 template <std::ranges::bidirectional_range Rng>
 bool valid_card(const Rng& digits) {
-  // STUDENT TODO: Implement this function.
-  throw std::runtime_error("Not implemented: valid_card");
+  // Walk from the rightmost digit: reverse once, then stride(2) picks the
+  // digits left alone, and drop(1) | stride(2) picks the digits to double.
+  auto reversed = digits | std::views::reverse;
+
+  auto undoubled = reversed | std::views::stride(2);
+
+  auto doubled = reversed | std::views::drop(1) | std::views::stride(2) |
+                 std::views::transform([](int d) {
+                   d *= 2;
+                   return d > 9 ? d - 9 : d;
+                 });
+
+  const int total =
+      std::ranges::fold_left(undoubled, 0, std::plus<>{}) +
+      std::ranges::fold_left(doubled, 0, std::plus<>{});
+  return total % 10 == 0;
 }
 
 /* #### Please don't remove this line! #### */
