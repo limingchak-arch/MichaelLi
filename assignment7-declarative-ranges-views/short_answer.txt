@@ -1,0 +1,25 @@
+Assignment 6: Declarative Pipelines — short answers
+====================================================
+
+Q1. Laziness. A views pipeline does no work until it is iterated. Give one
+    concrete benefit of this for trim_whitespace versus a function that
+    returns a trimmed std::string.
+    YOUR ANSWER:
+
+
+Q2. Concept subsumption. In Part 2, why does the random_access_range overload
+    win for a std::vector, even though the vector also satisfies forward_range
+    and bidirectional_range?
+    YOUR ANSWER:
+
+
+Q3. Lifetime of views. trim_whitespace produces a view that refers
+    back to the original string. What goes wrong if the underlying string is
+    destroyed (or modified) while the view is still in use?
+    YOUR ANSWER:
+
+
+Q4. Declarative vs. imperative. Pick one of your four solutions and describe
+    what the equivalent hand-written loop would look like. Which is easier to
+    read, and why?
+    YOUR ANSWER:

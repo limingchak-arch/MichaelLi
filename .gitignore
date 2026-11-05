@@ -1,0 +1,26 @@
+# Compiled binaries (assignments build to a bare `main` / `a.out`)
+main
+grid_bfs
+a.out
+*.out
+*.exe
+
+# Object files, libraries
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+
+# Debug symbols
+*.dSYM/
+*.pdb
+
+# Build directories
+build/
+cmake-build-*/
+
+# Editor / OS cruft
+.DS_Store
+.vscode/
+.idea/

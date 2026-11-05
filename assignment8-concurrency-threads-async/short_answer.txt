@@ -1,0 +1,25 @@
+Assignment 7: Parallel Letter Frequency — short answers
+========================================================
+
+Q1. Data races. What exactly is a data race, and why would having all worker
+    threads write into one shared std::unordered_map be undefined behaviour —
+    even if you "got the right answer" once?
+    YOUR ANSWER:
+
+
+Q2. Why the merge is sequential. Your workers run in parallel but the final
+    merge of partial maps runs on one thread. Why is that the right call here,
+    and when (if ever) would it become a bottleneck?
+    YOUR ANSWER:
+
+
+Q3. std::launch::async vs deferred. What is the difference between
+    std::async(std::launch::async, f) and std::async(f)? Why does it matter
+    for this assignment?
+    YOUR ANSWER:
+
+
+Q4. Thread cost. Spawning a thread per text would create thousands of threads
+    for a large corpus. Why is that usually a bad idea, and what is the common
+    fix?
+    YOUR ANSWER:
